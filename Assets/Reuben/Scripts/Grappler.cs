@@ -1,24 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class Grappler : MonoBehaviour
 {
+    private Camera mainCamera;
+    private LineRenderer lineRenderer;
+    private SpringJoint2D springJoint;
 
-    public Camera mainCamera;
-    public LineRenderer lineRenderer;
-    public SpringJoint2D springJoint;
-
-    public float retractSpeed = 0.5f;
-
-    [SerializeField] private GameObject pivot;
+    [SerializeField] private GameObject webShooterPivot;
     [SerializeField] private GameObject webShooter;
 
+    public float retractSpeed;
+
+    [SerializeField] private float webRange = 10f;
+
+    RaycastHit2D webHit;
     Vector2 mousePos;
 
     // Start is called before the first frame update
     void Start()
     {
+        mainCamera = Camera.main;
+        lineRenderer = GetComponent<LineRenderer>();
+        springJoint = GetComponent<SpringJoint2D>();
         springJoint.enabled = false;
     }
 
@@ -26,35 +33,66 @@ public class Grappler : MonoBehaviour
     void Update()
     {
         mousePos = (Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        LookAtMouse(webShooterPivot);
+
         if (Input.GetMouseButtonDown(0))
         {
-            lineRenderer.SetPosition(0, mousePos);
-            lineRenderer.SetPosition(1, transform.position);
-            springJoint.connectedAnchor = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-            springJoint.enabled = true;
-            lineRenderer.enabled = true;
+            if (CastGrappleRay())
+            {
+                FireWeb();
+            }
         }
         if (Input.GetMouseButton(0))
         {
-            springJoint.distance -= Time.deltaTime * retractSpeed;
+            ContractWeb();
         }
         else if(Input.GetMouseButtonUp(0))
         {
-            springJoint.enabled = false;
-            lineRenderer.enabled = false;
+            CancelWeb();
         }
         if (springJoint.enabled)
         {
             lineRenderer.SetPosition(1, webShooter.transform.position);
         }
-
-        PivotLookAtMouse();
     }
 
-    void PivotLookAtMouse()
+    bool CastGrappleRay()
     {
-        Vector2 direction = mousePos - (Vector2)pivot.transform.position;
+        Vector2 castDirection = (mousePos - (Vector2)webShooter.transform.position).normalized;
+        webHit = Physics2D.Raycast(webShooter.transform.position, castDirection, webRange);
+        if (webHit && webHit.collider.gameObject.layer != 6)
+        {
+            Debug.Log(webHit.collider.name);
+            return true;
+        }
+        Debug.Log("No hit");
+        return false;
+    }
+
+    void FireWeb()
+    {
+        lineRenderer.SetPosition(0, webHit.point);
+        lineRenderer.SetPosition(1, transform.position);
+        springJoint.connectedAnchor = webHit.point;
+        springJoint.enabled = true;
+        lineRenderer.enabled = true;
+    }
+    void ContractWeb()
+    {
+        //springJoint.distance -= Time.deltaTime * retractSpeed;
+        float distance = springJoint.distance;
+        springJoint.distance = Mathf.Lerp(distance, 0, distance * retractSpeed * Time.deltaTime);
+    }
+    void CancelWeb()
+    {
+        springJoint.enabled = false;
+        lineRenderer.enabled = false;
+    }
+
+    void LookAtMouse(GameObject obj)
+    {
+        Vector2 direction = mousePos - (Vector2)obj.transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        pivot.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        obj.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 }

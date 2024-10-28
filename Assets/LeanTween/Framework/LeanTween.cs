@@ -2885,7 +2885,10 @@ public class LeanTween : MonoBehaviour {
         }
     }
 
-
+    internal static Vector3 move(Vector3 vector3, Vector2 vector2, int v)
+    {
+        throw new NotImplementedException();
+    }
 } // End LeanTween class
 
 public class LTUtility {

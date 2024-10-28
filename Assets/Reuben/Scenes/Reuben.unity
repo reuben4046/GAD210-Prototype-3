@@ -463,7 +463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b5b228c2de99441ca18c84090a48fe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShooterPivot: {fileID: 2111470725}
+  shooterPivot: {fileID: 2111470725}
   shooter: {fileID: 1040758378}
   webRetractSpeed: 1
   grappleRetractSpeed: 30

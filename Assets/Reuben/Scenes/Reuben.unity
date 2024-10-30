@@ -325,7 +325,6 @@ GameObject:
   - component: {fileID: 774947053}
   - component: {fileID: 774947052}
   - component: {fileID: 774947056}
-  - component: {fileID: 774947061}
   - component: {fileID: 774947060}
   - component: {fileID: 774947058}
   - component: {fileID: 774947055}
@@ -497,12 +496,13 @@ MonoBehaviour:
   shooterPivot: {fileID: 2111470725}
   shooter: {fileID: 1040758378}
   grappleHook: {fileID: 1111949461}
-  grappleRangePoint: {fileID: 286369281}
   webRetractSpeed: 1
-  grappleRetractSpeed: 30
-  grappleRetractForce: 130.4
-  grappleSpeed: 48.95
-  webRange: 20
+  shooterAngleResetSpeed: 1
+  webAndGrappleRange: 20
+  grappleForce: 70
+  grappleForceMultiplier: 9
+  grappleForceTiming: 0.08
+  grappleSpeed: 74.3
 --- !u!120 &774947058
 LineRenderer:
   serializedVersion: 2
@@ -628,26 +628,6 @@ SpringJoint2D:
   m_Distance: 4.276096
   m_DampingRatio: 0.26
   m_Frequency: 0.8
---- !u!232 &774947061
-DistanceJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 774947051}
-  m_Enabled: 0
-  serializedVersion: 4
-  m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_BreakAction: 3
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0, y: 0}
-  m_AutoConfigureDistance: 1
-  m_Distance: 4.276096
-  m_MaxDistanceOnly: 0
 --- !u!1 &1040758378
 GameObject:
   m_ObjectHideFlags: 0

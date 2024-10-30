@@ -125,8 +125,8 @@ public class Shooter : MonoBehaviour
     bool CastRay()
     {
         Vector2 castDirection = (mousePos - (Vector2)shooter.transform.position).normalized;
-        int layersIncluded = 1 << 6;
-        LayerMask layerMask = ~layersIncluded;
+        //int layersIncluded = 1 << 6;
+        LayerMask layerMask = 9;
         shooterHit = Physics2D.Raycast(shooter.transform.position, castDirection, webRange, layerMask);
         if (shooterHit)
         {

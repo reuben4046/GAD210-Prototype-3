@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 
 public class Shooter : MonoBehaviour
 {
+    [Header("Shooter References")]
     private Camera mainCamera;
     private LineRenderer lineRenderer;
     private SpringJoint2D springJoint;
@@ -20,16 +21,20 @@ public class Shooter : MonoBehaviour
     private Quaternion targetRotation;
     private Rigidbody2D rb;
 
-    bool grappling = false;
-    bool shooting = false;
 
+    [Header("Web Settings")]
+    bool shooting = false;
     [SerializeField] private float webRetractSpeed;
     [SerializeField] private float shooterAngleResetSpeed;
-    [SerializeField] private float webAndGrappleRange;
+    [SerializeField] private float webRange;
+
+    [Header("Grapple Settings")]
+    bool grappling = false;
     [SerializeField] private float grappleForce;
     [SerializeField] private int grappleForceMultiplier;
     [SerializeField] private float grappleForceTiming;
     [SerializeField] private float grappleSpeed;
+    [SerializeField] private float grappleRetractSpeed;
 
     enum ShotType {Web, Grapple};
 
@@ -69,7 +74,7 @@ public class Shooter : MonoBehaviour
         else if(Input.GetMouseButtonUp(0))
         {
             shooting = false;
-            CancelShot();
+            CancelWeb();
         }
 
         if (Input.GetMouseButtonDown(1))
@@ -82,7 +87,7 @@ public class Shooter : MonoBehaviour
         {
             grappling = false;
             shooting = false;
-            StopCoroutine(FireGrapple(direction, grapplePos));
+            //StopCoroutine(FireGrapple(direction, grapplePos));
             StartCoroutine(CancelGrapple());
         }
 
@@ -94,7 +99,7 @@ public class Shooter : MonoBehaviour
 
         if (springJoint.enabled)
         {
-            Contract();
+            ContractWeb();
             lineRenderer.SetPosition(1, shooter.transform.position);
         }
     }
@@ -123,7 +128,7 @@ public class Shooter : MonoBehaviour
         Vector2 castDirection = (mousePos - (Vector2)shooter.transform.position).normalized;
         int layersIncluded = 1 << 6;
         LayerMask layerMask = ~layersIncluded;
-        shooterHit = Physics2D.Raycast(shooter.transform.position, castDirection, webAndGrappleRange, layerMask);
+        shooterHit = Physics2D.Raycast(shooter.transform.position, castDirection, webRange, layerMask);
         if (shooterHit)
         {
             return true;
@@ -133,18 +138,19 @@ public class Shooter : MonoBehaviour
 
     IEnumerator FireGrapple(Vector2 direction, Vector2 grapplePos)
     {
-        if (CastRay())
+        if (!CastRay()) {yield break;}
+
+        while (grapplePos != shooterHit.point)
         {
-            while (grapplePos != shooterHit.point)
-            {
-                LookAt(shooterHit.point);
-                grappleHook.transform.position = Vector3.MoveTowards(grappleHook.transform.position, shooterHit.point, grappleSpeed * Time.deltaTime);
-                grapplePos = new Vector2(grappleHook.transform.position.x, grappleHook.transform.position.y);
-                yield return null;
-            }
-            ShootPlayerAtGrapple(direction);
-            StopCoroutine(FireGrapple(direction, grapplePos));
+            if (!grappling) {yield break;}
+
+            LookAt(shooterHit.point);
+            grappleHook.transform.position = Vector3.MoveTowards(grappleHook.transform.position, shooterHit.point, grappleSpeed * Time.deltaTime);
+            grapplePos = new Vector2(grappleHook.transform.position.x, grappleHook.transform.position.y);
+            yield return null;
         }
+        ShootPlayerAtGrapple(direction);
+        yield break;
     }
 
     void ShootPlayerAtGrapple(Vector2 direction)
@@ -152,6 +158,7 @@ public class Shooter : MonoBehaviour
         StartCoroutine(CancelGrapple());
         StartCoroutine(AddForce(direction));
     }
+
     IEnumerator AddForce(Vector2 direction)
     {
         for (int i = 0; i < grappleForceMultiplier; i++)
@@ -166,23 +173,20 @@ public class Shooter : MonoBehaviour
     {
         while (grappleHook.transform.position != shooter.transform.position)
         {
-            grappleHook.transform.position = Vector3.Lerp(grappleHook.transform.position, shooter.transform.position, grappleSpeed);
+            grappleHook.transform.position = Vector3.Lerp(grappleHook.transform.position, shooter.transform.position, grappleRetractSpeed); // * Time.deltaTime);
             yield return null;
         }
-        if (grappleHook.transform.position == shooter.transform.position)
-        {
-            lineRenderer.enabled = false;
-        }
+        lineRenderer.enabled = false;
+        yield break;
     }
 
-    void Contract()
+    void ContractWeb()
     {
-        //springJoint (web)
         float distance = springJoint.distance;
         springJoint.distance = Mathf.Lerp(distance, 0, distance * webRetractSpeed * Time.deltaTime);
     }
 
-    void CancelShot()
+    void CancelWeb()
     {
         springJoint.enabled = false;
         lineRenderer.enabled = false;

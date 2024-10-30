@@ -498,11 +498,12 @@ MonoBehaviour:
   grappleHook: {fileID: 1111949461}
   webRetractSpeed: 1
   shooterAngleResetSpeed: 1
-  webAndGrappleRange: 20
+  webRange: 20
   grappleForce: 70
-  grappleForceMultiplier: 9
-  grappleForceTiming: 0.08
+  grappleForceMultiplier: 5
+  grappleForceTiming: 0.03
   grappleSpeed: 74.3
+  grappleRetractSpeed: 7.34
 --- !u!120 &774947058
 LineRenderer:
   serializedVersion: 2

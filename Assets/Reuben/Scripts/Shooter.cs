@@ -34,7 +34,7 @@ public class Shooter : MonoBehaviour
     [SerializeField] private int grappleForceMultiplier;
     [SerializeField] private float grappleForceTiming;
     [SerializeField] private float grappleSpeed;
-    [SerializeField] private float grappleRetractSpeed;
+    private float grappleRetractSpeed = 1f;
 
     enum ShotType {Web, Grapple};
 
@@ -87,7 +87,6 @@ public class Shooter : MonoBehaviour
         {
             grappling = false;
             shooting = false;
-            //StopCoroutine(FireGrapple(direction, grapplePos));
             StartCoroutine(CancelGrapple());
         }
 
@@ -173,7 +172,9 @@ public class Shooter : MonoBehaviour
     {
         while (grappleHook.transform.position != shooter.transform.position)
         {
-            grappleHook.transform.position = Vector3.Lerp(grappleHook.transform.position, shooter.transform.position, grappleRetractSpeed); // * Time.deltaTime);
+            grappleHook.transform.position = Vector3.Lerp(grappleHook.transform.position, shooter.transform.position, grappleRetractSpeed);
+            lineRenderer.SetPosition(0, shooter.transform.position);
+            lineRenderer.SetPosition(1, grappleHook.transform.position);
             yield return null;
         }
         lineRenderer.enabled = false;

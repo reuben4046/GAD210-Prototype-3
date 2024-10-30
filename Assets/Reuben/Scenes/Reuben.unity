@@ -345,7 +345,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 774947051}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f8441bad1d9806f41bf49a09280a849f, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -503,7 +503,6 @@ MonoBehaviour:
   grappleForceMultiplier: 5
   grappleForceTiming: 0.03
   grappleSpeed: 74.3
-  grappleRetractSpeed: 7.34
 --- !u!120 &774947058
 LineRenderer:
   serializedVersion: 2

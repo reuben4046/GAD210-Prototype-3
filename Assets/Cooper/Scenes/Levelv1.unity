@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 50249790}
   - component: {fileID: 50249789}
   - component: {fileID: 50249788}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hexagon Flat-Top (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 192953522}
   - component: {fileID: 192953521}
   - component: {fileID: 192953520}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hexagon Flat-Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -631,6 +631,10 @@ PrefabInstance:
       propertyPath: grappleForceMultiplier
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3008360030345486912, guid: cfc39473dde586b47bc3b93875aba931, type: 3}
+      propertyPath: grappleLayerMask.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 3712239840434071107, guid: cfc39473dde586b47bc3b93875aba931, type: 3}
       propertyPath: m_Name
       value: Player
@@ -665,8 +669,8 @@ GameObject:
   m_Component:
   - component: {fileID: 629082702}
   - component: {fileID: 629082701}
-  m_Layer: 9
-  m_Name: Square (2)
+  m_Layer: 0
+  m_Name: right
   m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -726,11 +730,11 @@ Transform:
   m_GameObject: {fileID: 629082700}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.707086, w: -0.70712763}
-  m_LocalPosition: {x: 10, y: -40, z: 0}
+  m_LocalPosition: {x: -14.038086, y: -75.72867, z: 0.79692197}
   m_LocalScale: {x: 560.0017, y: 560.0017, z: 560.0017}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1759674591}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -270.003}
 --- !u!1 &782111811
 GameObject:
@@ -782,7 +786,7 @@ GameObject:
   m_Component:
   - component: {fileID: 819790043}
   - component: {fileID: 819790042}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -866,8 +870,8 @@ GameObject:
   m_Component:
   - component: {fileID: 882335590}
   - component: {fileID: 882335589}
-  m_Layer: 9
-  m_Name: Square
+  m_Layer: 0
+  m_Name: Bottom
   m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -926,12 +930,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882335588}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -140, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -164.03809, y: -35.72867, z: 0.79692197}
   m_LocalScale: {x: 560.0017, y: 560.0017, z: 560.0017}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1759674591}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &991024774
 GameObject:
@@ -944,7 +948,7 @@ GameObject:
   - component: {fileID: 991024777}
   - component: {fileID: 991024776}
   - component: {fileID: 991024775}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hexagon Flat-Top (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1080,7 +1084,7 @@ GameObject:
   - component: {fileID: 1041262608}
   - component: {fileID: 1041262607}
   - component: {fileID: 1041262606}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hexagon Flat-Top (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1303,8 +1307,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1407141643}
   - component: {fileID: 1407141642}
-  m_Layer: 9
-  m_Name: Square (3)
+  m_Layer: 0
+  m_Name: left
   m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1364,11 +1368,11 @@ Transform:
   m_GameObject: {fileID: 1407141641}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.707086, w: -0.70712763}
-  m_LocalPosition: {x: -440, y: -40, z: 0}
+  m_LocalPosition: {x: -464.0381, y: -75.72867, z: 0.79692197}
   m_LocalScale: {x: 560.0017, y: 560.0017, z: 560.0017}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1759674591}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -270.003}
 --- !u!1 &1492720603
 GameObject:
@@ -1381,7 +1385,7 @@ GameObject:
   - component: {fileID: 1492720606}
   - component: {fileID: 1492720605}
   - component: {fileID: 1492720604}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hexagon Flat-Top (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1642,6 +1646,41 @@ PolygonCollider2D:
       - {x: 0.43359375, y: 0.25}
       - {x: 0, y: 0.5}
   m_UseDelaunayMesh: 0
+--- !u!1 &1759674590
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1759674591}
+  m_Layer: 0
+  m_Name: Out Of Bounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1759674591
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759674590}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 24.038086, y: 35.72867, z: -0.79692197}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 882335590}
+  - {fileID: 1961036898}
+  - {fileID: 629082702}
+  - {fileID: 1407141643}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1779545896
 GameObject:
   m_ObjectHideFlags: 0
@@ -1790,7 +1829,7 @@ GameObject:
   - component: {fileID: 1782289237}
   - component: {fileID: 1782289236}
   - component: {fileID: 1782289239}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: Start Hill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2225,8 +2264,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1961036898}
   - component: {fileID: 1961036897}
-  m_Layer: 9
-  m_Name: Square (1)
+  m_Layer: 0
+  m_Name: top
   m_TagString: Hazard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2286,11 +2325,11 @@ Transform:
   m_GameObject: {fileID: 1961036896}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -1, w: -0.000030875202}
-  m_LocalPosition: {x: -140, y: 70, z: 0}
+  m_LocalPosition: {x: -164.03809, y: 34.27133, z: 0.79692197}
   m_LocalScale: {x: 560.0017, y: 560.0017, z: 560.0017}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1759674591}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180.004}
 --- !u!1 &1963612243
 GameObject:
@@ -2333,7 +2372,4 @@ SceneRoots:
   - {fileID: 782111812}
   - {fileID: 1917430526}
   - {fileID: 1963612244}
-  - {fileID: 882335590}
-  - {fileID: 1961036898}
-  - {fileID: 629082702}
-  - {fileID: 1407141643}
+  - {fileID: 1759674591}

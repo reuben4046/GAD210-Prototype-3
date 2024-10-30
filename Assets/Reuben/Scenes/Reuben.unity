@@ -499,6 +499,9 @@ MonoBehaviour:
   webRetractSpeed: 1
   shooterAngleResetSpeed: 1
   webRange: 20
+  grappleLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   grappleForce: 70
   grappleForceMultiplier: 5
   grappleForceTiming: 0.03
@@ -939,7 +942,7 @@ GameObject:
   - component: {fileID: 1400569681}
   - component: {fileID: 1400569680}
   - component: {fileID: 1400569679}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: Grappleable
   m_TagString: Untagged
   m_Icon: {fileID: 0}

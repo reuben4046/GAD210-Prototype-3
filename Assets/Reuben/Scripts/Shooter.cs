@@ -29,6 +29,7 @@ public class Shooter : MonoBehaviour
     [SerializeField] private float webRange;
 
     [Header("Grapple Settings")]
+    [SerializeField] private LayerMask grappleLayerMask;
     bool grappling = false;
     [SerializeField] private float grappleForce;
     [SerializeField] private int grappleForceMultiplier;
@@ -126,8 +127,7 @@ public class Shooter : MonoBehaviour
     {
         Vector2 castDirection = (mousePos - (Vector2)shooter.transform.position).normalized;
         //int layersIncluded = 1 << 6;
-        LayerMask layerMask = 9;
-        shooterHit = Physics2D.Raycast(shooter.transform.position, castDirection, webRange, layerMask);
+        shooterHit = Physics2D.Raycast(shooter.transform.position, castDirection, webRange, grappleLayerMask);
         if (shooterHit)
         {
             return true;

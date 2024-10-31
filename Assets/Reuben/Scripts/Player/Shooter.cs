@@ -23,7 +23,7 @@ public class Shooter : MonoBehaviour
 
 
     [Header("Web Settings")]
-    bool shooting = false;
+    private bool shooting = false;
     [SerializeField] private float webRetractSpeed;
     [SerializeField] private float shooterAngleResetSpeed;
     [SerializeField] private float webRange;
@@ -35,9 +35,9 @@ public class Shooter : MonoBehaviour
     [SerializeField] private int grappleForceMultiplier;
     [SerializeField] private float grappleForceTiming;
     [SerializeField] private float grappleSpeed;
-    private float grappleRetractSpeed = 1f;
+    private readonly float grappleRetractSpeed = 1f;
 
-    enum ShotType {Web, Grapple};
+    private enum ShotType {Web, Grapple};
 
     // Start is called before the first frame update
     void Start()

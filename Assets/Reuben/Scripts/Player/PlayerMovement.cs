@@ -44,6 +44,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Ground"));
+        return true; //GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Ground"));
     }
 }

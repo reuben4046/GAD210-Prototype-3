@@ -16,12 +16,24 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
-
+    bool isGrounded;
     private void Update()
     {   
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+        if (IsGrounded())
+        {
+            if (!isGrounded)
+            {
+                isGrounded = true;
+                EventSystem.OnPlayerHitGround?.Invoke();
+            }
+        }
+        else
+        {
+            isGrounded = false;
         }
     }
 
@@ -44,6 +56,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return true; //GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Ground"));
+        return GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Ground"));
     }
 }

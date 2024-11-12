@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb4f8b35f882402c9b3697beda832de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1679946151}
   chunkSize: 20
 --- !u!1 &1012513401
 GameObject:

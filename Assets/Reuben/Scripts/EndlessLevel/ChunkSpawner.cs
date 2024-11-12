@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chunk : MonoBehaviour
+public class ChunkSpawner : MonoBehaviour
 {
+    [SerializeField] private Transform player;
 
     [SerializeField] private int chunkSize;
+
+    private float chunkCenter;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        chunkCenter = chunkSize / 2;
     }
 
     // Update is called once per frame
@@ -24,6 +27,7 @@ public class Chunk : MonoBehaviour
     {
         Gizmos.color = Color.green;
 
-        Gizmos.DrawWireCube(transform.position, new Vector3(chunkSize, chunkSize, chunkSize));
+        Gizmos.DrawWireCube(transform.position, new Vector2(chunkSize, chunkSize));
     }
 }
+

@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 663320566}
   - component: {fileID: 663320567}
   m_Layer: 0
-  m_Name: Chunk
+  m_Name: ChunkSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,6 +168,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1679946151}
   chunkSize: 20
+  chunks:
+  - {fileID: 2807372796803464900, guid: df06a111d708642b785c44679b537119, type: 3}
+  - {fileID: 8394244727310471730, guid: 0fb03c61030c148aa9cb3e77956dda47, type: 3}
+  - {fileID: 8388238837406862825, guid: 5a78be40cfd404d6f9e44a9989fd9c6e, type: 3}
+  - {fileID: 5627442759643242548, guid: cde018a241bb34e8abd5cf61d82099b6, type: 3}
 --- !u!1 &1012513401
 GameObject:
   m_ObjectHideFlags: 0

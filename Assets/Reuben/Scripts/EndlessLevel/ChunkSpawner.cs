@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ChunkSpawner : MonoBehaviour
@@ -11,7 +12,8 @@ public class ChunkSpawner : MonoBehaviour
     [SerializeField] private int chunkSize;
 
     private float chunkCenter;
-    [SerializeField] private GameObject[] chunks;
+
+    List<Chunk> chunks = new List<Chunk>();
 
     void Awake()
     {
@@ -27,9 +29,17 @@ public class ChunkSpawner : MonoBehaviour
 
     void GenerateChunk()
     {
-        int randomChunk = Random.Range(0, chunks.Length);
-        GameObject chunk = Instantiate(chunks[randomChunk], new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        int randomChunk = Random.Range(0, chunks.Count);
+        Chunk chunk = Instantiate(chunks[randomChunk], new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
         chunk.transform.parent = transform;
+        foreach (Chunk c in chunks)
+        {
+            if (c != chunk)
+            {
+                c.isMostRecentChunk = false;
+            }
+        }
+
     }
 
     void OnDrawGizmos()

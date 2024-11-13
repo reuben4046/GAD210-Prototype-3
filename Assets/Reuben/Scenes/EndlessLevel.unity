@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1679946151}
-  chunkSize: 216
+  chunkSize: 200
   chunks:
   - {fileID: 8032989149316202917, guid: cde018a241bb34e8abd5cf61d82099b6, type: 3}
   - {fileID: -9026791409788974358, guid: 5a78be40cfd404d6f9e44a9989fd9c6e, type: 3}

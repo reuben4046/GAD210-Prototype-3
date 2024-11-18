@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,17 +7,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
 
-    [SerializeField] private Vector2 forceDirection;
+    [SerializeField] private LayerMask layerMask;
 
     public int maxVelocity = 20;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        StartCoroutine(GetMovementDirection());
     }
     bool isGrounded;
-    private void Update()
+    void Update()
     {   
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
@@ -40,44 +35,13 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = false;
         }
 
-        // Vector2 velocity = rb.velocity;
-        // float velocityMagnitude = velocity.magnitude;
-        // rb.velocity = Mathf.Clamp(velocityMagnitude, 0, maxVelocity) * velocity.normalized;
-    }
-
-    IEnumerator GetMovementDirection()
-    {
-        while (true)
-        {
-            Vector2 savedPosition = transform.position;
-            yield return new WaitForSeconds(0.1f);
-            Vector2 currentPosition = transform.position;
-            forceDirection = (currentPosition - savedPosition).normalized;
-            yield return forceDirection;
-        }
+        Vector2 velocity = rb.velocity;
+        float velocityMagnitude = velocity.magnitude;
+        rb.velocity = Mathf.Clamp(velocityMagnitude, 0, maxVelocity) * velocity.normalized;
     }
 
     void FixedUpdate()
     {   
-        // if (Input.GetKey(KeyCode.A))
-        // {
-        //     if (forceDirection.x == 0)
-        //     {
-        //         forceDirection = Vector2.right;
-        //     }
-        //     rb.AddForce(forceDirection * speed * Time.fixedDeltaTime);
-        // }
-        // if (Input.GetKey(KeyCode.D))
-        // {
-        //     if (forceDirection.x == 0)
-        //     {
-        //         forceDirection = Vector2.left;
-        //     }
-        //     rb.AddForce(-forceDirection * speed * Time.fixedDeltaTime);
-        // }
-        
-
-
         if (Input.GetKey(KeyCode.A))
         {
             rb.AddForce(Vector2.left * speed * Time.fixedDeltaTime);
@@ -88,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         
-
         // Vector2 velocity = rb.velocity;
         // float velocityMagnitude = velocity.magnitude;
 
@@ -97,6 +60,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return GetComponent<Collider2D>().IsTouchingLayers(LayerMask.GetMask("Ground"));
+        return GetComponent<Collider2D>().IsTouchingLayers(layerMask);
     }
 }

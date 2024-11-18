@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WebShooter : MonoBehaviour
 {
     [Header("Shooter References")]
-    [SerializeField] private Camera mainCamera;
+    private Camera mainCamera;
     private LineRenderer lineRenderer;
     private SpringJoint2D springJoint;
     [SerializeField] private GameObject shooterPivot;
@@ -23,7 +22,7 @@ public class WebShooter : MonoBehaviour
 
     void Start()
     {
-        //mainCamera = Camera.main;
+        mainCamera = FindObjectOfType<Camera>();
         lineRenderer = GetComponent<LineRenderer>();
         springJoint = GetComponent<SpringJoint2D>();
         springJoint.enabled = false;

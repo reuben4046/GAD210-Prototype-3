@@ -24,7 +24,6 @@ public class ChunkSpawner : MonoBehaviour
     {
         SpawnChunks();
         DestroyOldChunks();
-       //Debug.Log(chunksInScene.Count);
     }
 
     void SpawnChunks()

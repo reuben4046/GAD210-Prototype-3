@@ -6,4 +6,7 @@ static class EventSystem
 {
     public delegate void PlayerHitGround();
     public static PlayerHitGround OnPlayerHitGround;
+
+    public delegate void ChunkSpawned(List<Transform> objectives);
+    public static ChunkSpawned OnChunkSpawned;
 }

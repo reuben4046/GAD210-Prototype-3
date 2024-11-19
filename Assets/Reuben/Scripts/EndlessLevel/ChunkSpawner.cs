@@ -17,7 +17,7 @@ public class ChunkSpawner : MonoBehaviour
     void Awake()
     {
         chunkCenter = chunkSize / 2;
-        GenerateChunk(transform.position.x);
+        GenerateChunk(transform.position.x + chunkSize);
     }
 
     void Update()

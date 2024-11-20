@@ -56,9 +56,13 @@ public class WebShooter : MonoBehaviour
 
         if (springJoint.enabled)
         {
-            ContractWeb();
+            if (!Input.GetMouseButton(1)) // added function to stop web retract when holding down right mouse button
+            {
+                ContractWeb();
+            }
             lineRenderer.SetPosition(1, shooter.transform.position);
         }
+        
     }
 
     void FireShot(Vector2 direction)

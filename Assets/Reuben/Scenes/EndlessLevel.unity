@@ -250,6 +250,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5578202218002282623, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: webRange
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 5578202218002282623, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: webRetractSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6422501969489294645, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: maxVelocity
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -824,7 +836,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 18.17
+  orthographic size: 25
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1190,7 +1202,7 @@ MonoBehaviour:
   m_Follow: {fileID: 825848708}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 18.17
+    OrthographicSize: 25
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0

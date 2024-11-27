@@ -254,10 +254,6 @@ PrefabInstance:
       propertyPath: webRange
       value: 45
       objectReference: {fileID: 0}
-    - target: {fileID: 5578202218002282623, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
-      propertyPath: webRetractSpeed
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6422501969489294645, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
       propertyPath: maxVelocity
       value: 50

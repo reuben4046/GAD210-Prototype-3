@@ -345,7 +345,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  maxVelocity: 40
+  maxVelocity: 50
 --- !u!114 &5578202218002282623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,7 +362,7 @@ MonoBehaviour:
   shooter: {fileID: 3507127119315476767}
   webRetractSpeed: 1
   shooterAngleResetSpeed: 1
-  webRange: 30
+  webRange: 45
   layerMask:
     serializedVersion: 2
     m_Bits: 4294967295

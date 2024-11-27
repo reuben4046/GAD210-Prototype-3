@@ -8,18 +8,24 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce;
 
     [SerializeField] private LayerMask layerMask;
+    AudioSource soundOutput;
+    public AudioClip jump;
+    public AudioClip landing;
+
 
     public int maxVelocity = 20;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        soundOutput = GetComponent<AudioSource>();
     }
     bool isGrounded;
     void Update()
     {   
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
+            soundOutput.PlayOneShot(jump);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
         if (IsGrounded())
@@ -27,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
             if (!isGrounded)
             {
                 isGrounded = true;
+                soundOutput.PlayOneShot(landing);
                 EventSystem.OnPlayerHitGround?.Invoke();
             }
         }

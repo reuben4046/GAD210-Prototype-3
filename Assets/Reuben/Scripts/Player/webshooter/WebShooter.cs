@@ -19,6 +19,8 @@ public class WebShooter : MonoBehaviour
     [SerializeField] private float webRange;
     [SerializeField] private LayerMask layerMask;
     private bool shooting = false;
+    AudioSource soundOutput;
+    public AudioClip webSound;
 
     void Start()
     {
@@ -26,6 +28,7 @@ public class WebShooter : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         springJoint = GetComponent<SpringJoint2D>();
         springJoint.enabled = false;
+        soundOutput = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -46,6 +49,8 @@ public class WebShooter : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && CastRay() && !shooting)
         {
             shooting = true;
+            soundOutput.volume = 0.5f;
+            soundOutput.PlayOneShot(webSound);
             FireShot(direction);
         }
         else if(Input.GetMouseButtonUp(0))

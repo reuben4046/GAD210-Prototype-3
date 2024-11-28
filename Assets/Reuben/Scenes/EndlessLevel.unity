@@ -255,8 +255,24 @@ PrefabInstance:
       value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 6422501969489294645, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: jumpForce
+      value: 40.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6422501969489294645, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
       propertyPath: maxVelocity
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7365332256638337680, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: m_AutoConfigureDistance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667044558748418906, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: m_Mass
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7667044558748418906, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: m_LinearDrag
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

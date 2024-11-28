@@ -24,10 +24,12 @@ public class MenuUi : MonoBehaviour
     {
         if (gameInfo.scores.Count == 0) return;
         var top5 = gameInfo.scores.OrderByDescending(score => score.Value).Take(5);
+        int placeNumber = 0;
         foreach (var score in top5)
         {
             var scoreEntry = Instantiate(scoreEntryPrefab, VerticalLayoutGroupTransform);
-            scoreEntry.GetComponentInChildren<TextMeshProUGUI>().text = $"{score.Key}: {score.Value}";
+            placeNumber++;
+            scoreEntry.GetComponentInChildren<TextMeshProUGUI>().text = $"#{placeNumber} {score.Key}: {score.Value}";
         }
     }
 

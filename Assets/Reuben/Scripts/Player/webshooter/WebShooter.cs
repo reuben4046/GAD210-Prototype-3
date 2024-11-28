@@ -68,7 +68,7 @@ public class WebShooter : MonoBehaviour
 
         if (Input.GetMouseButton(1))
         {
-            springJoint.dampingRatio = .5f;
+            springJoint.dampingRatio = .5f; //////Could possibly make it so it is like this all the time. need to ask cooper what he thinks when I see him next
             springJoint.frequency = .5f;
             
         } 

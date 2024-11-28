@@ -18,5 +18,16 @@ public class GameUi : MonoBehaviour
     {
         distanceTraveledText.text = playerTransform.position.x.ToString("0");
         gameInfo.score = (int)playerTransform.position.x;
+        if (gameInfo.scores.ContainsKey(gameInfo.currentPlayer))
+        {
+            if (gameInfo.score > gameInfo.scores[gameInfo.currentPlayer])
+            {
+                gameInfo.scores[gameInfo.currentPlayer] = gameInfo.score;
+            }
+        }
+        else
+        {
+            gameInfo.scores[gameInfo.currentPlayer] = gameInfo.score;
+        }
     }
 }

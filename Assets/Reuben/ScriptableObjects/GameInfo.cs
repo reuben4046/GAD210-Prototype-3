@@ -6,4 +6,8 @@ using UnityEngine;
 public class GameInfo : ScriptableObject
 {
     public int score;
+
+    public Dictionary<string, int> scores = new Dictionary<string, int>();
+    public string currentPlayer;
+
 }

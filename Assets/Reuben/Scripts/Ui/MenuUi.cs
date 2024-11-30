@@ -16,6 +16,7 @@ public class MenuUi : MonoBehaviour
 
     void Start()
     {
+        if (gameInfo.currentPlayer != null) inputField.text = gameInfo.currentPlayer;
         ClearScores();
         RefreshScores();
     }

@@ -17,7 +17,7 @@ public class EffectsController : MonoBehaviour
         EventSystem.OnPlayerCollision -= OnPlayerCollision;
     }
 
-    void OnPlayerCollision()
+    void OnPlayerCollision(Vector2 contactPoint)
     {
         onPlayerCollision.PlayFeedbacks();
     } 

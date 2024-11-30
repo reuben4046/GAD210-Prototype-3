@@ -78,6 +78,6 @@ public class PlayerMovement : MonoBehaviour
         Vector2 contactPoint = other.GetContact(0).point;
         impactParticles.transform.position = contactPoint;
         impactParticles.Play();
-        //EventSystem.OnPlayerCollision?.Invoke();
+        EventSystem.OnPlayerCollision?.Invoke(contactPoint);
     }
 }

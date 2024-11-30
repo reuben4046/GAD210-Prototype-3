@@ -9,7 +9,7 @@ public class CameraTarget : MonoBehaviour
 
     private float cameraPosX = 0f;
 
-    private float cameraMovementSpeed = 0f;
+    [SerializeField] private float cameraMovementSpeed = 0f;
 
     [Range(0f, .5f)]
     [SerializeField] private float speedMultiplier = 0.2f;
@@ -28,7 +28,7 @@ public class CameraTarget : MonoBehaviour
     {
         cameraMovementSpeed += Time.deltaTime;
         cameraPosX += cameraMovementSpeed * Time.deltaTime * speedMultiplier;
-        Mathf.Clamp(cameraMovementSpeed, 0, maxCameraMovementSpeed);
+        cameraMovementSpeed = Mathf.Clamp(cameraMovementSpeed, 0, maxCameraMovementSpeed);
 
         if (transform.position.x <= player.position.x - catchUpToPlayerOffset - 1f)
         {
@@ -37,7 +37,7 @@ public class CameraTarget : MonoBehaviour
 
         transform.position = new Vector2(cameraPosX, player.position.y);
 
-        if (transform.position.x > player.position.x + 40f || transform.position.y < -80f)
+        if (transform.position.x > player.position.x + 50f || transform.position.y < -80f)
         {
             SceneManager.LoadScene(2);
             EventSystem.OnGameOver?.Invoke();

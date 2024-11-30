@@ -19,6 +19,6 @@ static class EventSystem
     public delegate void SendShooterHitPointInfo(Vector2 hitPoint, Vector2 playerPosition);
     public static SendShooterHitPointInfo OnSendShooterHitPointInfo;
 
-    public delegate void PlayerCollision();
+    public delegate void PlayerCollision(Vector2 contactPoint);
     public static PlayerCollision OnPlayerCollision;
 }

@@ -12,4 +12,13 @@ static class EventSystem
 
     public delegate void GameOver();
     public static GameOver OnGameOver;
+
+    public delegate void BroadCastPlayerMovementDirection(Vector2 direction);
+    public static BroadCastPlayerMovementDirection OnBroadCastPlayerMovementDirection;
+
+    public delegate void SendShooterHitPointInfo(Vector2 hitPoint, Vector2 playerPosition);
+    public static SendShooterHitPointInfo OnSendShooterHitPointInfo;
+
+    public delegate void PlayerCollision();
+    public static PlayerCollision OnPlayerCollision;
 }

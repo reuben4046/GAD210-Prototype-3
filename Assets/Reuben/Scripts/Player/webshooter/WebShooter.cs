@@ -1,8 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using MoreMountains.Feedbacks;
 
 public class WebShooter : MonoBehaviour
 {
+    MMFeedbacks mmFeedbacks;
+    [SerializeField] private Transform shooterHitPointTransform;
+
     [Header("Shooter References")]
     private Camera mainCamera;
     private LineRenderer lineRenderer;
@@ -17,7 +21,6 @@ public class WebShooter : MonoBehaviour
     [SerializeField] private float webRetractSpeed;
     [SerializeField] private float shooterAngleResetSpeed;
     [SerializeField] private float webRange;
-    [SerializeField] private float webSwingDamping;
     [SerializeField] private LayerMask layerMask;
     private bool shooting = false;
     float webDamping;
@@ -36,6 +39,7 @@ public class WebShooter : MonoBehaviour
         // soundOutput = GetComponent<AudioSource>();
         webDamping = springJoint.dampingRatio;
         webFrequency = springJoint.frequency;
+        mmFeedbacks = GetComponent<MMFeedbacks>();
     }
 
     void Update()
@@ -55,10 +59,11 @@ public class WebShooter : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && CastRay() && !shooting)
         {
+            mmFeedbacks.PlayFeedbacks();
             shooting = true;
             // soundOutput.volume = 0.5f;
             // soundOutput.PlayOneShot(webSound);
-            FireShot(direction);
+            FireShot();
         }
         else if(Input.GetMouseButtonUp(0))
         {
@@ -85,13 +90,14 @@ public class WebShooter : MonoBehaviour
         }
     }
 
-    void FireShot(Vector2 direction)
+    void FireShot()
     {
         lineRenderer.SetPosition(0, shooterHit.point);
         lineRenderer.SetPosition(1, transform.position);
         springJoint.connectedAnchor = shooterHit.point;
         springJoint.enabled = true;
         lineRenderer.enabled = true;
+        EventSystem.OnSendShooterHitPointInfo?.Invoke(shooterHit.point, transform.position);
     }
 
     bool CastRay()

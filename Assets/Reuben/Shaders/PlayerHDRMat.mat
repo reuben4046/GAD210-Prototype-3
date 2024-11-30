@@ -40,9 +40,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _Intensity: 0
     m_Colors:
-    - _Color: {r: 0.74901956, g: 0.74901956, b: 0.74901956, a: 0}
+    - _Color: {r: 202.86792, g: 202.86792, b: 202.86792, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7631018667080414688
 MonoBehaviour:

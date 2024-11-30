@@ -3,25 +3,29 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private ParticleSystem impactParticles;
+    [SerializeField] private Material playerHDRMat;
+    [SerializeField] private AnimationCurve velocityColorCurve;
+
     private Rigidbody2D rb;
 
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
 
     [SerializeField] private LayerMask layerMask;
+    bool isGrounded;
+    private float velocityMagnitude;
+    [SerializeField] private int maxVelocity = 20;
+
     AudioSource soundOutput;
     public AudioClip jump;
-    public AudioClip landing;
-
-
-    public int maxVelocity = 20;
+    public AudioClip landing;    
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         soundOutput = GetComponent<AudioSource>();
     }
-    bool isGrounded;
+
     void Update()
     {   
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
@@ -44,11 +48,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Vector2 velocity = rb.velocity;
-        float velocityMagnitude = velocity.magnitude;
+        velocityMagnitude = velocity.magnitude;
         rb.velocity = Mathf.Clamp(velocityMagnitude, 0, maxVelocity) * velocity.normalized;
 
-        Vector2 velocityDirection = velocity.normalized;
-        // EventSystem.OnBroadCastPlayerMovementDirection(velocityDirection);
+        ControlColorBasedOnVelocity();
     }
 
     void FixedUpdate()
@@ -61,11 +64,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector2.right * speed * Time.fixedDeltaTime);
         }
-
-        // Vector2 velocity = rb.velocity;
-        // float velocityMagnitude = velocity.magnitude;
-
-        // rb.velocity = Mathf.Clamp(velocityMagnitude, 0, maxVelocity) * velocity.normalized;
     }
 
     private bool IsGrounded()
@@ -79,5 +77,10 @@ public class PlayerMovement : MonoBehaviour
         impactParticles.transform.position = contactPoint;
         impactParticles.Play();
         EventSystem.OnPlayerCollision?.Invoke(contactPoint);
+    }
+
+    void ControlColorBasedOnVelocity()
+    {
+        //playerHDRMat.SetFloat("_Intensity", .78f - velocityColorCurve.Evaluate(velocityMagnitude / 100f));
     }
 }

@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AnimationCurve audioControllCurve;
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip landingSound;
+    [SerializeField] private AudioClip windWhooshSound;
 
     void Start()
     {
@@ -37,8 +38,13 @@ public class PlayerMovement : MonoBehaviour
         velocityMagnitude = velocity.magnitude;
         rb.velocity = Mathf.Clamp(velocityMagnitude, 0, maxVelocity) * velocity.normalized;
 
-        ScaleWindSoundBasedOnVelocity();
+        if (velocity.magnitude == 40)
+        {
+            audioSource.PlayOneShot(windWhooshSound);
+        }
+        // ScaleWindSoundBasedOnVelocity();
     }
+
 
     void FixedUpdate()
     {   
@@ -66,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 contactPoint = other.GetContact(0).point;
         impactParticles.transform.position = contactPoint;
         impactParticles.Play();
-        
+
         EventSystem.OnPlayerCollision?.Invoke(contactPoint, collisionForce.magnitude);
     }
 
@@ -79,19 +85,19 @@ public class PlayerMovement : MonoBehaviour
         audioSource.PlayOneShot(landingSound, scaledVol);
     }
 
-    void ScaleWindSoundBasedOnVelocity()
-    {
-        float minVol = 0f;
-        float maxVol = .5f;
-        float velocityToVol = Mathf.Clamp(rb.velocity.magnitude, 0, maxVelocity);
-        float scaledVol = Mathf.Lerp(minVol, maxVol, audioControllCurve.Evaluate(velocityToVol / maxVelocity));
-        windAudioSource.volume = scaledVol;
+    // void ScaleWindSoundBasedOnVelocity()
+    // {
+    //     float minVol = 0f;
+    //     float maxVol = .5f;
+    //     float velocityToVol = Mathf.Clamp(rb.velocity.magnitude, 0, maxVelocity);
+    //     float scaledVol = Mathf.Lerp(minVol, maxVol, audioControllCurve.Evaluate(velocityToVol / maxVelocity));
+    //     windAudioSource.volume = scaledVol;
 
-        float minPitch = 0.1f;
-        float maxPitch = 1f;
-        float velocityToPitch = Mathf.Clamp(rb.velocity.magnitude, 0, maxVelocity);
-        float scaledPitch = Mathf.Lerp(minPitch, maxPitch, audioControllCurve.Evaluate(velocityToPitch / maxVelocity));
-        windAudioSource.pitch = scaledPitch;
-    }
+    //     float minPitch = 0.1f;
+    //     float maxPitch = 1f;
+    //     float velocityToPitch = Mathf.Clamp(rb.velocity.magnitude, 0, maxVelocity);
+    //     float scaledPitch = Mathf.Lerp(minPitch, maxPitch, audioControllCurve.Evaluate(velocityToPitch / maxVelocity));
+    //     windAudioSource.pitch = scaledPitch;
+    // }
 
 }

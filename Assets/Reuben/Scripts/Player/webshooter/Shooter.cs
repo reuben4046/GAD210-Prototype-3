@@ -102,6 +102,7 @@ public class Shooter : MonoBehaviour
             ContractWeb();
             lineRenderer.SetPosition(1, shooter.transform.position);
         }
+        lineRenderer.SetPosition(1, shooter.transform.position);
     }
 
     void FireShot(ShotType type, Vector2 direction, Vector2 grapplePos)
@@ -126,7 +127,6 @@ public class Shooter : MonoBehaviour
     bool CastRay()
     {
         Vector2 castDirection = (mousePos - (Vector2)shooter.transform.position).normalized;
-        //int layersIncluded = 1 << 6;
         shooterHit = Physics2D.Raycast(shooter.transform.position, castDirection, webRange, grappleLayerMask);
         if (shooterHit)
         {

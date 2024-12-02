@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8407222504389336575}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: objective (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7914937943333899519}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: objective (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 3966611550080527341}
   - component: {fileID: 6219395592130056393}
   - component: {fileID: 9188849598447964123}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Circle (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -431,7 +431,7 @@ GameObject:
   - component: {fileID: 5250477298808286709}
   - component: {fileID: 8833335646168641883}
   - component: {fileID: 7506047470005535447}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -603,7 +603,7 @@ GameObject:
   - component: {fileID: 8446131567282956243}
   - component: {fileID: 1528012332676319758}
   - component: {fileID: 7714570621239305659}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Circle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1328,7 +1328,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4124606272770638696}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Objectives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1484,7 +1484,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1510139616746902566}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: objective (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1515,7 +1515,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1518905376255910253}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: objective (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1546,7 +1546,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6382700067732167070}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: objective (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

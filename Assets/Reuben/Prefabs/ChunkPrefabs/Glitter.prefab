@@ -1651,7 +1651,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2333668873476271583}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Objectives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1807,7 +1807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6717285898817963483}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: objective (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1838,7 +1838,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8436108409453379456}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: objective (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1869,7 +1869,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6126350083571723035}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: objective (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

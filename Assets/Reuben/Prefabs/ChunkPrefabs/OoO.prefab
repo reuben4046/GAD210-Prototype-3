@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7256494689102202348}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Objectives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8044832485514226731}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: objective (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -727,7 +727,7 @@ GameObject:
   - component: {fileID: 5273609071106489157}
   - component: {fileID: 5441978493537853264}
   - component: {fileID: 8277702085235088055}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Circle (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -896,7 +896,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 648775463208085168}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: objective (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -930,7 +930,7 @@ GameObject:
   - component: {fileID: 2706520082007718486}
   - component: {fileID: 8102888179857574597}
   - component: {fileID: 6747344627822558055}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Circle (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1271,7 +1271,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 930790448802528612}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: objective (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1302,7 +1302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2680677836466717285}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: objective (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

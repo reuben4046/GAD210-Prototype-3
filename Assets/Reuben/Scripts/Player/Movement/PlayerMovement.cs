@@ -3,8 +3,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private ParticleSystem impactParticles;
-    [SerializeField] private Material playerHDRMat;
-    [SerializeField] private AnimationCurve velocityColorCurve;
 
     private Rigidbody2D rb;
 
@@ -16,42 +14,30 @@ public class PlayerMovement : MonoBehaviour
     private float velocityMagnitude;
     [SerializeField] private int maxVelocity = 20;
 
-    AudioSource soundOutput;
-    public AudioClip jump;
-    public AudioClip landing;    
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource windAudioSource;
+    [SerializeField] private AnimationCurve audioControllCurve;
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip landingSound;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        soundOutput = GetComponent<AudioSource>();
     }
 
     void Update()
     {   
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
-            soundOutput.PlayOneShot(jump);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        }
-        if (IsGrounded())
-        {
-            if (!isGrounded)
-            {
-                isGrounded = true;
-                soundOutput.PlayOneShot(landing);
-                EventSystem.OnPlayerHitGround?.Invoke();
-            }
-        }
-        else
-        {
-            isGrounded = false;
         }
 
         Vector2 velocity = rb.velocity;
         velocityMagnitude = velocity.magnitude;
         rb.velocity = Mathf.Clamp(velocityMagnitude, 0, maxVelocity) * velocity.normalized;
 
-        ControlColorBasedOnVelocity();
+        ScaleWindSoundBasedOnVelocity();
     }
 
     void FixedUpdate()
@@ -73,14 +59,39 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
+        Vector2 collisionForce = other.relativeVelocity;
+        
+        ScaleImpactSoundBasedOnVelocity(collisionForce);
+
         Vector2 contactPoint = other.GetContact(0).point;
         impactParticles.transform.position = contactPoint;
         impactParticles.Play();
-        EventSystem.OnPlayerCollision?.Invoke(contactPoint);
+        
+        EventSystem.OnPlayerCollision?.Invoke(contactPoint, collisionForce.magnitude);
     }
 
-    void ControlColorBasedOnVelocity()
+    void ScaleImpactSoundBasedOnVelocity(Vector2 collisionForce)
     {
-        //playerHDRMat.SetFloat("_Intensity", .78f - velocityColorCurve.Evaluate(velocityMagnitude / 100f));
+        float minVol = 0.001f;
+        float maxVol = .5f;
+        float velocityToVol = Mathf.Clamp(collisionForce.magnitude, 0, maxVelocity);
+        float scaledVol = Mathf.Lerp(minVol, maxVol, audioControllCurve.Evaluate(velocityToVol / maxVelocity));
+        audioSource.PlayOneShot(landingSound, scaledVol);
     }
+
+    void ScaleWindSoundBasedOnVelocity()
+    {
+        float minVol = 0f;
+        float maxVol = .5f;
+        float velocityToVol = Mathf.Clamp(rb.velocity.magnitude, 0, maxVelocity);
+        float scaledVol = Mathf.Lerp(minVol, maxVol, audioControllCurve.Evaluate(velocityToVol / maxVelocity));
+        windAudioSource.volume = scaledVol;
+
+        float minPitch = 0.1f;
+        float maxPitch = 1f;
+        float velocityToPitch = Mathf.Clamp(rb.velocity.magnitude, 0, maxVelocity);
+        float scaledPitch = Mathf.Lerp(minPitch, maxPitch, audioControllCurve.Evaluate(velocityToPitch / maxVelocity));
+        windAudioSource.pitch = scaledPitch;
+    }
+
 }

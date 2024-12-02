@@ -24,11 +24,6 @@ public class ShooterHitPointParticlePlayer : MonoBehaviour
     void OnSendShooterHitPointInfo(Vector2 shooterHitPoint, Vector2 playerPosition)
     {
         transform.position = shooterHitPoint;
-        Vector2 direction = (shooterHitPoint - playerPosition).normalized;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 180f;
-        Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = targetRotation;
-
         muzzleFlashParticle.Play();
     }
 }

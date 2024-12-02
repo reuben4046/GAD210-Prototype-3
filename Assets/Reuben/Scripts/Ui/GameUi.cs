@@ -12,8 +12,6 @@ public class GameUi : MonoBehaviour
     void Start()
     {
         playerTransform = GameObject.FindWithTag("Player").transform;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
     }
 
     void Update()

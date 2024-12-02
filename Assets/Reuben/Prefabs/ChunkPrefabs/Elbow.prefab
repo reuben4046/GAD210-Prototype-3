@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7336825647426668139}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: objective (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 3108432817796727861}
   - component: {fileID: 5158025434688609388}
   - component: {fileID: 8579427213076459221}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Triangle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,7 +407,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3551197644291056772}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Objectives
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 3302751454667472192}
   - component: {fileID: 586551553436875531}
   - component: {fileID: 4119050607762249527}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Circle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -616,7 +616,7 @@ GameObject:
   - component: {fileID: 4092941273469472959}
   - component: {fileID: 6710880538416296956}
   - component: {fileID: 286043849826893465}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Triangle (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -980,7 +980,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5030402656735432873}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: objective (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1329,7 +1329,7 @@ GameObject:
   - component: {fileID: 257346029554013221}
   - component: {fileID: 2125357371807383408}
   - component: {fileID: 5684505533165474653}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1511,7 +1511,7 @@ GameObject:
   - component: {fileID: 2692749874033623297}
   - component: {fileID: 4064651594886228634}
   - component: {fileID: 1327575639511396945}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1869,7 +1869,7 @@ GameObject:
   - component: {fileID: 2955402680527124013}
   - component: {fileID: 7851048415299481885}
   - component: {fileID: 3046509179984272398}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2054,7 +2054,7 @@ GameObject:
   - component: {fileID: 5379079946083575372}
   - component: {fileID: 6852415645895380471}
   - component: {fileID: 6032893882877685610}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2236,7 +2236,7 @@ GameObject:
   - component: {fileID: 9090452247917079969}
   - component: {fileID: 8010648000623209885}
   - component: {fileID: 7841773145199218739}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Triangle (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2421,7 +2421,7 @@ GameObject:
   - component: {fileID: 1509456435186537439}
   - component: {fileID: 1878742244785679345}
   - component: {fileID: 6369292914702613638}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Triangle (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2606,7 +2606,7 @@ GameObject:
   - component: {fileID: 976881192629825556}
   - component: {fileID: 5173196006521321216}
   - component: {fileID: 8481246574416496404}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2975,7 +2975,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1954702647519729867}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: objective (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3009,7 +3009,7 @@ GameObject:
   - component: {fileID: 5482085941828762275}
   - component: {fileID: 2256877551522186562}
   - component: {fileID: 5886970886651697320}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Triangle (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -22,8 +22,11 @@ public class WebShooter : MonoBehaviour
     private bool shooting = false;
     float webDamping;
     float webFrequency;
-    // AudioSource soundOutput;
-    // public AudioClip webSound;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip thudSound;
+    [SerializeField] private AudioClip popSound;
 
 
 
@@ -33,7 +36,6 @@ public class WebShooter : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         springJoint = GetComponent<SpringJoint2D>();
         springJoint.enabled = false;
-        // soundOutput = GetComponent<AudioSource>();
         webDamping = springJoint.dampingRatio;
         webFrequency = springJoint.frequency;
     }
@@ -56,12 +58,19 @@ public class WebShooter : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && CastRay() && !shooting)
         {
             shooting = true;
-            // soundOutput.volume = 0.5f;
-            // soundOutput.PlayOneShot(webSound);
-            FireShot();
+            StopCoroutine(RotateToMouseLook(shooterPivot, direction));
+            LookAt(shooterHit.point);
+            FireWeb();
+
+            audioSource.PlayOneShot(thudSound);
         }
         else if(Input.GetMouseButtonUp(0))
         {
+            if (shooting)
+            {
+                audioSource.PlayOneShot(thudSound, .3f);
+                EventSystem.OnSendShooterHitPointInfo?.Invoke(shooterHit.point, transform.position);                       
+            }
             shooting = false;
             CancelWeb();
         }
@@ -85,13 +94,13 @@ public class WebShooter : MonoBehaviour
         }
     }
 
-    void FireShot()
+    void FireWeb()
     {
         lineRenderer.SetPosition(0, shooterHit.point);
-        lineRenderer.SetPosition(1, transform.position);
         springJoint.connectedAnchor = shooterHit.point;
         springJoint.enabled = true;
         lineRenderer.enabled = true;
+        lineRenderer.SetPosition(1, shooter.transform.position);
         EventSystem.OnSendShooterHitPointInfo?.Invoke(shooterHit.point, transform.position);
     }
 

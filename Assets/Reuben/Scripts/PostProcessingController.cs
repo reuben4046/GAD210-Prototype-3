@@ -16,7 +16,7 @@ public class PostProcessingController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float hueShiftValue = Mathf.Sin(Time.time / 6) * 180f;
+        float hueShiftValue = Mathf.Sin(Time.time / 12) * 180f;
         if (volumeProfile.TryGet(out ColorAdjustments colorAdjustments))
         {
             colorAdjustments.hueShift.value = hueShiftValue;

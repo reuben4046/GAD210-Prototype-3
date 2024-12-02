@@ -12,6 +12,8 @@ public class GameUi : MonoBehaviour
     void Start()
     {
         playerTransform = GameObject.FindWithTag("Player").transform;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     void Update()
@@ -28,6 +30,12 @@ public class GameUi : MonoBehaviour
         else
         {
             gameInfo.scores[gameInfo.currentPlayer] = gameInfo.score;
+        }
+
+        if (!Cursor.visible || Cursor.lockState != CursorLockMode.None)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 }

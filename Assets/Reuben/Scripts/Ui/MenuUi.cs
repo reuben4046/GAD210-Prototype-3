@@ -21,6 +21,15 @@ public class MenuUi : MonoBehaviour
         RefreshScores();
     }
 
+    void Update()
+    {
+        if (!Cursor.visible || Cursor.lockState != CursorLockMode.None)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
     public void RefreshScores()
     {
         if (gameInfo.scores.Count == 0) return;

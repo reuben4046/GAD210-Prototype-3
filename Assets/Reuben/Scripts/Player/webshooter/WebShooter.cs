@@ -4,9 +4,6 @@ using MoreMountains.Feedbacks;
 
 public class WebShooter : MonoBehaviour
 {
-    MMFeedbacks mmFeedbacks;
-    [SerializeField] private Transform shooterHitPointTransform;
-
     [Header("Shooter References")]
     private Camera mainCamera;
     private LineRenderer lineRenderer;
@@ -39,7 +36,6 @@ public class WebShooter : MonoBehaviour
         // soundOutput = GetComponent<AudioSource>();
         webDamping = springJoint.dampingRatio;
         webFrequency = springJoint.frequency;
-        mmFeedbacks = GetComponent<MMFeedbacks>();
     }
 
     void Update()
@@ -59,7 +55,6 @@ public class WebShooter : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && CastRay() && !shooting)
         {
-            mmFeedbacks.PlayFeedbacks();
             shooting = true;
             // soundOutput.volume = 0.5f;
             // soundOutput.PlayOneShot(webSound);

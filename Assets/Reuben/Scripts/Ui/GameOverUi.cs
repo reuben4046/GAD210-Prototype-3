@@ -11,6 +11,17 @@ public class GameOverUi : MonoBehaviour
     void Start()
     {
         scoreText.text = $"Score: {gameInfo.score}";
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    void Update()
+    {
+        if (!Cursor.visible || Cursor.lockState != CursorLockMode.None)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     public void Restart()

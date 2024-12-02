@@ -5,6 +5,7 @@ using UnityEngine;
 public class SplatterController : MonoBehaviour
 {
     [SerializeField] private List<GameObject> splatterSprites = new List<GameObject>();
+    private List<GameObject> spawnedSplatters = new List<GameObject>();
 
     void OnEnable()
     {
@@ -24,18 +25,16 @@ public class SplatterController : MonoBehaviour
     void SpawnSplatter(Vector2 contactPoint)
     {
         int randomIndex = Random.Range(0, splatterSprites.Count);
-        Instantiate(splatterSprites[randomIndex], contactPoint, Quaternion.identity);
+        GameObject splatter = Instantiate(splatterSprites[randomIndex], contactPoint, Quaternion.identity);
+        spawnedSplatters.Add(splatter);
     }
 
     void Update()
     {
-        if (splatterSprites.Count > 10)
+        if (spawnedSplatters.Count > 10)
         {
-            while (splatterSprites.Count > 10)
-            {
-                Destroy(splatterSprites[0]);
-                splatterSprites.RemoveAt(0);
-            }
+            Destroy(spawnedSplatters[0]);
+            spawnedSplatters.RemoveAt(0);
         }
     }
 }

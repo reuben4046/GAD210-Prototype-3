@@ -29,7 +29,7 @@ public class CameraTarget : MonoBehaviour
         cameraMovementSpeed += Time.deltaTime;
         cameraPosX += cameraMovementSpeed * Time.deltaTime * speedMultiplier;
         cameraMovementSpeed = Mathf.Clamp(cameraMovementSpeed, 0, maxCameraMovementSpeed);
-
+        Debug.Log(cameraMovementSpeed);
         if (transform.position.x <= player.position.x - catchUpToPlayerOffset - 1f)
         {
             cameraPosX = player.position.x - catchUpToPlayerOffset;

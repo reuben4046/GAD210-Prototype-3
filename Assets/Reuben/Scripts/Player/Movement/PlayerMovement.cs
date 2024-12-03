@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -5,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private ParticleSystem impactParticles;
 
     private Rigidbody2D rb;
+    private LineRenderer lineRenderer;
 
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
@@ -22,16 +24,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip landingSound;
     [SerializeField] private AudioClip windWhooshSound;
+    private bool whooshSoundCoolDown = false;
+    [SerializeField] private float windWhooshSoundCoolDown = 1f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        lineRenderer = GetComponent<LineRenderer>();
     }
 
     void Update()
     {   
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
+            audioSource.PlayOneShot(landingSound, .3f);
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
@@ -39,11 +45,19 @@ public class PlayerMovement : MonoBehaviour
         velocityMagnitude = velocity.magnitude;
         rb.velocity = Mathf.Clamp(velocityMagnitude, 0, maxVelocity) * velocity.normalized;
 
-        if (velocity.magnitude == 40)
+        if (velocityMagnitude > maxVelocity && lineRenderer.enabled && !whooshSoundCoolDown)
         {
-            audioSource.PlayOneShot(windWhooshSound);
+            whooshSoundCoolDown = true;
+            StartCoroutine(WhooshSoundEffectCoolDown());
+            audioSource.PlayOneShot(windWhooshSound, .3f);
         }
-        ScaleWindSoundBasedOnVelocity();
+        // ScaleWindSoundBasedOnVelocity();
+    }
+
+    IEnumerator WhooshSoundEffectCoolDown()
+    {
+        yield return new WaitForSeconds(windWhooshSoundCoolDown);
+        whooshSoundCoolDown = false;
     }
 
 

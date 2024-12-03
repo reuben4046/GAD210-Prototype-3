@@ -63,7 +63,7 @@ public class GameUi : MonoBehaviour
     public void UpdateScoreMultiplier(float scoreMultiplier)
     {
         if (scoreMultiplier == 1f) scoreMultiplierText.text = "";
-        scoreMultiplierText.text = scoreMultiplier.ToString() + "x";
+        scoreMultiplierText.text = scoreMultiplier.ToString("0.0") + "x";
     }
 
     void OnScoreStreakEnded(Vector2 collisionForce, float maxVelocity)

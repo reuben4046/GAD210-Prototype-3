@@ -360,6 +360,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6422501969489294645, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: windAudioControllCurve.m_Curve.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6422501969489294645, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
       propertyPath: windAudioCurve.m_Curve.Array.data[1].time
       value: 0.19738486
       objectReference: {fileID: 0}
@@ -444,8 +448,52 @@ PrefabInstance:
       value: 3.6406217
       objectReference: {fileID: 0}
     - target: {fileID: 6422501969489294645, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: windAudioControllCurve.m_Curve.Array.data[1].time
+      value: 0.80464053
+      objectReference: {fileID: 0}
+    - target: {fileID: 6422501969489294645, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: windAudioControllCurve.m_Curve.Array.data[2].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6422501969489294645, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
       propertyPath: audioControllCurve.m_Curve.Array.data[1].outWeight
       value: 0.12071165
+      objectReference: {fileID: 0}
+    - target: {fileID: 6422501969489294645, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: windAudioControllCurve.m_Curve.Array.data[1].value
+      value: -0.001751184
+      objectReference: {fileID: 0}
+    - target: {fileID: 6422501969489294645, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: windAudioControllCurve.m_Curve.Array.data[2].value
+      value: 1.0055542
+      objectReference: {fileID: 0}
+    - target: {fileID: 6422501969489294645, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: windAudioControllCurve.m_Curve.Array.data[1].inSlope
+      value: 0.05239698
+      objectReference: {fileID: 0}
+    - target: {fileID: 6422501969489294645, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: windAudioControllCurve.m_Curve.Array.data[2].inSlope
+      value: 11.75915
+      objectReference: {fileID: 0}
+    - target: {fileID: 6422501969489294645, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: windAudioControllCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6422501969489294645, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: windAudioControllCurve.m_Curve.Array.data[1].outSlope
+      value: 0.05239698
+      objectReference: {fileID: 0}
+    - target: {fileID: 6422501969489294645, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: windAudioControllCurve.m_Curve.Array.data[2].inWeight
+      value: 0.060457874
+      objectReference: {fileID: 0}
+    - target: {fileID: 6422501969489294645, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: windAudioControllCurve.m_Curve.Array.data[2].outSlope
+      value: 11.75915
+      objectReference: {fileID: 0}
+    - target: {fileID: 6422501969489294645, guid: 1d02a1f0a72fc4e0bbc60fda6255355a, type: 3}
+      propertyPath: windAudioControllCurve.m_Curve.Array.data[1].outWeight
+      value: 0.44244364
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -566,7 +614,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218117060}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 61adbcc674ef9493b935b364a8510f55, type: 3}

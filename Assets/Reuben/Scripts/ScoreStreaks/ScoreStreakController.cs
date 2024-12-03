@@ -55,11 +55,11 @@ public class ScoreStreakController : MonoBehaviour
     {
         while (true)
         {
-            scoreMultiplier += 0.1f;
+            scoreMultiplier += Time.deltaTime / 6;
             float scoreIncrease = 1 * scoreMultiplier;
             gameInfo.score += scoreIncrease;
             gameUi.UpdateScoreMultiplier(scoreMultiplier);
-            yield return new WaitForSeconds(1f);
+            yield return null;
         }
     }
 

@@ -14,18 +14,23 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     bool isGrounded;
     private float velocityMagnitude;
+    private Vector2 collisionForce;
     [SerializeField] private int maxVelocity = 20;
 
     [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioSource windAudioSource;
-    [SerializeField] private AnimationCurve windAudioControllCurve;    
+    // [SerializeField] private AudioSource windAudioSource;
+    // [SerializeField] private AnimationCurve windAudioControllCurve;    
     [SerializeField] private AnimationCurve audioControllCurve;
-    [SerializeField] private AudioClip jumpSound;
+    // [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip landingSound;
     [SerializeField] private AudioClip windWhooshSound;
     private bool whooshSoundCoolDown = false;
     [SerializeField] private float windWhooshSoundCoolDown = 1f;
+
+    //ScoreStreakVariables
+    private bool scoreStreakActive = false;
+    int consecutiveSwings = 1;
 
     void Start()
     {
@@ -47,11 +52,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (velocityMagnitude > maxVelocity && lineRenderer.enabled && !whooshSoundCoolDown)
         {
+            if (scoreStreakActive)
+            {
+                consecutiveSwings ++;
+            }
+            scoreStreakActive = true;
+            streakInactiveCalled = false;
             whooshSoundCoolDown = true;
             StartCoroutine(WhooshSoundEffectCoolDown());
             audioSource.PlayOneShot(windWhooshSound, .3f);
+
+            EventSystem.OnPerfectSwing?.Invoke(consecutiveSwings);
         }
-        // ScaleWindSoundBasedOnVelocity();
+        CheckScoreStreakActive();
     }
 
     IEnumerator WhooshSoundEffectCoolDown()
@@ -80,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Vector2 collisionForce = other.relativeVelocity;
+        collisionForce = other.relativeVelocity;
         
         ScaleImpactSoundBasedOnVelocity(collisionForce);
 
@@ -89,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
         impactParticles.Play();
 
         EventSystem.OnPlayerCollision?.Invoke(contactPoint, collisionForce.magnitude);
+        scoreStreakActive = false;
     }
 
     void ScaleImpactSoundBasedOnVelocity(Vector2 collisionForce)
@@ -100,19 +114,30 @@ public class PlayerMovement : MonoBehaviour
         audioSource.PlayOneShot(landingSound, scaledVol);
     }
 
-    void ScaleWindSoundBasedOnVelocity()
+    bool streakInactiveCalled = false;
+    void CheckScoreStreakActive()
     {
-        float minVol = 0f;
-        float maxVol = .5f;
-        float velocityToVol = Mathf.Clamp(rb.velocity.magnitude, 0, maxVelocity);
-        float scaledVol = Mathf.Lerp(minVol, maxVol, audioControllCurve.Evaluate(velocityToVol / maxVelocity));
-        windAudioSource.volume = scaledVol;
-
-        float minPitch = 0.1f;
-        float maxPitch = 1f;
-        float velocityToPitch = Mathf.Clamp(rb.velocity.magnitude, 0, maxVelocity);
-        float scaledPitch = Mathf.Lerp(minPitch, maxPitch, audioControllCurve.Evaluate(velocityToPitch / maxVelocity));
-        windAudioSource.pitch = scaledPitch;
+        if (!scoreStreakActive && !streakInactiveCalled)
+        {
+            streakInactiveCalled = true;
+            consecutiveSwings = 1;
+            EventSystem.OnScoreStreakEnded?.Invoke(collisionForce, maxVelocity);
+        }
     }
+
+    // void ScaleWindSoundBasedOnVelocity()
+    // {
+    //     float minVol = 0f;
+    //     float maxVol = .5f;
+    //     float velocityToVol = Mathf.Clamp(rb.velocity.magnitude, 0, maxVelocity);
+    //     float scaledVol = Mathf.Lerp(minVol, maxVol, audioControllCurve.Evaluate(velocityToVol / maxVelocity));
+    //     windAudioSource.volume = scaledVol;
+
+    //     float minPitch = 0.1f;
+    //     float maxPitch = 1f;
+    //     float velocityToPitch = Mathf.Clamp(rb.velocity.magnitude, 0, maxVelocity);
+    //     float scaledPitch = Mathf.Lerp(minPitch, maxPitch, audioControllCurve.Evaluate(velocityToPitch / maxVelocity));
+    //     windAudioSource.pitch = scaledPitch;
+    // }
 
 }

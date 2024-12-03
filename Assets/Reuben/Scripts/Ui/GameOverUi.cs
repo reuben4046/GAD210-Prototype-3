@@ -10,7 +10,7 @@ public class GameOverUi : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     void Start()
     {
-        scoreText.text = $"Score: {gameInfo.score}";
+        scoreText.text = $"Score: {(int)gameInfo.score}";
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }

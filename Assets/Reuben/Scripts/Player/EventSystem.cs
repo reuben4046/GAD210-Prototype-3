@@ -18,4 +18,10 @@ static class EventSystem
 
     public delegate void PlayerCollision(Vector2 contactPoint, float collisionForce);
     public static PlayerCollision OnPlayerCollision;
+
+    public delegate void PerfectSwing(int consecutiveSwings);
+    public static PerfectSwing OnPerfectSwing;
+
+    public delegate void ScoreStreakEnded(Vector2 collisionForce, float maxVelocity);
+    public static ScoreStreakEnded OnScoreStreakEnded;
 }

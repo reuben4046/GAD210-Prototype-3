@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/GameInfo")]
 public class GameInfo : ScriptableObject
 {
-    public int score;
+    public float score;
 
     public Dictionary<string, int> scores = new Dictionary<string, int>();
     public string currentPlayer;

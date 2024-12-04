@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     //ScoreStreakVariables
     private bool scoreStreakActive = false;
     int consecutiveSwings = 1;
+    [SerializeField] private float perfectSwingThreshold = 5f;
 
     void Start()
     {
@@ -50,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         velocityMagnitude = velocity.magnitude;
         rb.velocity = Mathf.Clamp(velocityMagnitude, 0, maxVelocity) * velocity.normalized;
 
-        if (velocityMagnitude > maxVelocity && lineRenderer.enabled && !whooshSoundCoolDown)
+        if (velocityMagnitude > maxVelocity - perfectSwingThreshold && lineRenderer.enabled && !whooshSoundCoolDown)
         {
             if (scoreStreakActive)
             {

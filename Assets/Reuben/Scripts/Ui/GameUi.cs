@@ -33,11 +33,11 @@ public class GameUi : MonoBehaviour
 
     void Update()
     {
-        if ((int)playerTransform.position.x > previousX)
-        {
-            gameInfo.score ++;
-            previousX = (int)playerTransform.position.x;
-        }
+        //if ((int)playerTransform.position.x > previousX)
+        //{
+        //    gameInfo.score ++;
+        //    previousX = (int)playerTransform.position.x;
+        //}
 
         distanceTraveledText.text = gameInfo.score.ToString("0");
 

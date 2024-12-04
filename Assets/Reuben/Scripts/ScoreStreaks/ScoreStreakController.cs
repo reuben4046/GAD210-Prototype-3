@@ -45,10 +45,10 @@ public class ScoreStreakController : MonoBehaviour
         MMF_FloatingText floatingText = floatingTextMMFPlayer.GetFeedbackOfType<MMF_FloatingText>();
         floatingText.Value = "+" + perfectSwingScoreIncrease * consecutiveSwings;
         floatingTextMMFPlayer.PlayFeedbacks();
-        if (consecutiveSwings == 1)
-        {
-            scoreMultiplierCoroutine = StartCoroutine(ScoreMultiplier());
-        }
+        //if (consecutiveSwings == 1)
+        //{
+        //    scoreMultiplierCoroutine = StartCoroutine(ScoreMultiplier());
+        //}
     }
 
     IEnumerator ScoreMultiplier()

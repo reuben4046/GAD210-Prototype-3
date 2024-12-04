@@ -4,6 +4,7 @@ using MoreMountains.Feedbacks;
 
 public class WebShooter : MonoBehaviour
 {
+    [SerializeField] private Rigidbody2D rb;
     [Header("Shooter References")]
     private Camera mainCamera;
     private LineRenderer lineRenderer;
@@ -29,6 +30,9 @@ public class WebShooter : MonoBehaviour
     [SerializeField] private AudioClip popSound;
 
 
+    float breakForce;
+    bool timeToClick = false;
+
 
     void Start()
     {
@@ -38,10 +42,34 @@ public class WebShooter : MonoBehaviour
         springJoint.enabled = false;
         webDamping = springJoint.dampingRatio;
         webFrequency = springJoint.frequency;
+
+
+        rb = GetComponent<Rigidbody2D>();
     }
+    Coroutine giveSpeedCoroutine;
+    private void OnJointBreak2D(Joint2D joint)
+    {
+        //Debug.Log($"joint broken - reaction force = {springJoint.reactionForce}");
+        if (giveSpeedCoroutine == null)
+        {
+            giveSpeedCoroutine = StartCoroutine(GiveSpeedBoost());
+        }
+    }
+
+    IEnumerator GiveSpeedBoost()
+    {
+        yield return new WaitForSeconds(.5f);
+        timeToClick = true;
+        yield return new WaitForSeconds(1f);
+        timeToClick = false;
+        giveSpeedCoroutine = null;
+    }
+
+
 
     void Update()
     {
+        Debug.Log(springJoint.reactionForce.magnitude);
         mousePos = (Vector2)mainCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = mousePos - (Vector2)shooter.transform.position;
 
@@ -61,7 +89,8 @@ public class WebShooter : MonoBehaviour
             StopCoroutine(RotateToMouseLook(shooterPivot, direction));
             LookAt(shooterHit.point);
             FireWeb();
-
+            springJoint.dampingRatio = .5f;
+            springJoint.frequency = .5f;
             audioSource.PlayOneShot(thudSound);
         }
         else if(Input.GetMouseButtonUp(0))
@@ -73,19 +102,12 @@ public class WebShooter : MonoBehaviour
             }
             shooting = false;
             CancelWeb();
-        }
 
-        if (Input.GetMouseButton(1))
-        {
-            springJoint.dampingRatio = .5f; //////Could possibly make it so it is like this all the time. need to ask cooper what he thinks when I see him next
-            springJoint.frequency = .5f;
-            
-        } 
-        else
-        {
-            ContractWeb();
-            springJoint.dampingRatio = webDamping;
-            springJoint.frequency = webFrequency;
+            if (timeToClick)
+            {
+                Debug.Log("SpeedBoostApplied");
+                rb.AddForce(new Vector2(50, 0), ForceMode2D.Impulse);
+            }
         }
 
         if (springJoint.enabled)

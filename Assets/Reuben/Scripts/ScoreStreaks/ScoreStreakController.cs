@@ -18,25 +18,43 @@ public class ScoreStreakController : MonoBehaviour
     [SerializeField] private GameInfo gameInfo;
     [SerializeField] private MMF_Player floatingTextMMFPlayer;
     [SerializeField] private int perfectSwingScoreIncrease = 100;
+    private int consecutiveSwings = 0;
+    MMF_FloatingText perfectSwingFloatingText;
 
     [Header("Score Streak")]
     [SerializeField] private MMF_Player streakEndedMMFPlayer;
     [SerializeField] private float forceRequiredToEndStreak = 10f;
     private Coroutine scoreMultiplierCoroutine;
     private bool isStreaking = false;
-    private int consecutiveSwings = 0;
+    [SerializeField] private float streakEndPenalty = 100f;
+
+    [Header("Speed Bonus")]
+    [SerializeField] private MMF_Player speedBonusMMFPlayer;
+    MMF_FloatingText speedBonusFloatingText;
+    float displayedSpeedBonusNumber = 0f;
+    [SerializeField] private float speedBonusScoreIncrease = 1f;
+    private Coroutine speedBonusCoroutine;
 
 
     void OnEnable()
     {
         EventSystem.OnPerfectSwing += OnPerfectSwing;
         EventSystem.OnScoreStreakEnded += OnScoreStreakEnded;
+        EventSystem.OnSpeedBonusActive += OnSpeedBonusActive;
     }
 
     void OnDisable()
     {
         EventSystem.OnPerfectSwing -= OnPerfectSwing;
         EventSystem.OnScoreStreakEnded -= OnScoreStreakEnded;
+        EventSystem.OnSpeedBonusActive -= OnSpeedBonusActive;
+    }
+    
+    void Start()
+    {
+        perfectSwingFloatingText = floatingTextMMFPlayer.GetFeedbackOfType<MMF_FloatingText>();
+        speedBonusFloatingText = speedBonusMMFPlayer.GetFeedbackOfType<MMF_FloatingText>();
+        StartCoroutine(SpeedBonus());
     }
 
     void OnPerfectSwing()
@@ -44,13 +62,12 @@ public class ScoreStreakController : MonoBehaviour
         consecutiveSwings++;
         audioSource.PlayOneShot(scoreUpSound, .1f);
         gameInfo.score += perfectSwingScoreIncrease * consecutiveSwings;
-        MMF_FloatingText floatingText = floatingTextMMFPlayer.GetFeedbackOfType<MMF_FloatingText>();
-        floatingText.Value = "Perfect Swing! +" + perfectSwingScoreIncrease * consecutiveSwings;
+        perfectSwingFloatingText.Value = "Perfect Swing! +" + perfectSwingScoreIncrease * consecutiveSwings;
         floatingTextMMFPlayer.PlayFeedbacks();
+        gameUi.UpdateTexts(consecutiveSwings, 0);
         if (consecutiveSwings >= 1)
         {
             isStreaking = true;
-            gameUi.UpdateScoreMultiplier(consecutiveSwings);
         }
     }
 
@@ -72,10 +89,12 @@ public class ScoreStreakController : MonoBehaviour
         if (collisionForce.magnitude < forceRequiredToEndStreak) return;
 
         consecutiveSwings = 0;
-        gameUi.UpdateScoreMultiplier(consecutiveSwings);
+        gameUi.UpdateTexts(consecutiveSwings, streakEndPenalty);
         isStreaking = false;
 
         streakEndedMMFPlayer.PlayFeedbacks();
+        perfectSwingFloatingText.Value = "-" + streakEndPenalty;
+        floatingTextMMFPlayer.PlayFeedbacks();
 
         float minVol = .1f;
         float maxVol = 1f;
@@ -83,5 +102,38 @@ public class ScoreStreakController : MonoBehaviour
         float scaledVol = Mathf.Lerp(minVol, maxVol, audioControllCurve.Evaluate(magnitudeToVol / maxVelocity));
         audioSource.volume = scaledVol;
         audioSource.PlayOneShot(scoreSreakEndSound, scaledVol);
+    }
+
+    bool speedBonusOn = false;
+    void OnSpeedBonusActive(bool isSpeedBonusActive)
+    {
+        if (isSpeedBonusActive)
+        {
+            speedBonusOn = true;
+        }
+        else
+        {
+            speedBonusOn = false;
+        }
+    }
+
+    IEnumerator SpeedBonus()
+    {
+        while (true)
+        {
+            if (speedBonusOn)
+            {
+                displayedSpeedBonusNumber++;
+                gameUi.UpdateSpeedBonus(displayedSpeedBonusNumber, visible: true);
+                gameInfo.score++;
+                yield return new WaitForSeconds(.1f);
+            }
+            else
+            {
+                displayedSpeedBonusNumber = 0f;
+                gameUi.UpdateSpeedBonus(displayedSpeedBonusNumber, visible: false);
+                yield return null;
+            }
+        }
     }
 }

@@ -27,4 +27,7 @@ static class EventSystem
 
     public delegate void SendTimeTillPerfectSwing(float timeTillPerfectSwing, bool isPerfectSwinging);
     public static SendTimeTillPerfectSwing OnSendTimeTillPerfectSwing;
+
+    public delegate void SpeedBonusActive(bool active);
+    public static SpeedBonusActive OnSpeedBonusActive;
 }

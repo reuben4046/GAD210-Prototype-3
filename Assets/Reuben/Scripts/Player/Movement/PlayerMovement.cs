@@ -26,10 +26,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip windWhooshSound;
     private bool whooshSoundCoolDown = false;
     [SerializeField] private float windWhooshSoundCoolDown = 1f;
-
-    //ScoreStreakVariables
-    private bool scoreStreakActive = false;
-    int consecutiveSwings = 1;
     [SerializeField] private float perfectSwingThreshold = 5f;
 
     void Start()
@@ -57,6 +53,8 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(WhooshSoundEffectCoolDown());
             audioSource.PlayOneShot(windWhooshSound, .3f);
         }
+
+        SetSpeedBonusActive();
     }
 
     IEnumerator WhooshSoundEffectCoolDown()
@@ -95,7 +93,6 @@ public class PlayerMovement : MonoBehaviour
 
         EventSystem.OnPlayerCollision?.Invoke(contactPoint, collisionForce.magnitude);
         EventSystem.OnScoreStreakEnded?.Invoke(collisionForce, maxVelocity);
-        scoreStreakActive = false;
     }
 
     void ScaleImpactSoundBasedOnVelocity(Vector2 collisionForce)
@@ -105,6 +102,17 @@ public class PlayerMovement : MonoBehaviour
         float velocityToVol = Mathf.Clamp(collisionForce.magnitude, 0, maxVelocity);
         float scaledVol = Mathf.Lerp(minVol, maxVol, audioControllCurve.Evaluate(velocityToVol / maxVelocity));
         audioSource.PlayOneShot(landingSound, scaledVol);
+    }
+
+    void SetSpeedBonusActive()
+    {
+        bool isSpeedBonusActive = false;
+        if (velocityMagnitude > maxVelocity - perfectSwingThreshold)
+        {
+            isSpeedBonusActive = true;
+        }
+
+        EventSystem.OnSpeedBonusActive?.Invoke(isSpeedBonusActive);
     }
 
     // void ScaleWindSoundBasedOnVelocity()

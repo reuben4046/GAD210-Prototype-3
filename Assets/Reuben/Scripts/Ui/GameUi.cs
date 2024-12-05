@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using MoreMountains.Feedbacks;
 
 public class GameUi : MonoBehaviour
 {
     [SerializeField] private GameInfo gameInfo;
-    [SerializeField] private TextMeshProUGUI distanceTraveledText;
+    [SerializeField] private TextMeshProUGUI scoreText;
 
     [SerializeField] private TextMeshProUGUI consecutiveSwingsText;
 
     [SerializeField] private Slider timeTillPerfectSwingSlider;
+
+    [SerializeField] private MMSpringTMPDilate scoreTextSpring;
+
+    [SerializeField] private TextMeshProUGUI speedBonusText;
 
     void Start()
     {
@@ -34,7 +39,7 @@ public class GameUi : MonoBehaviour
 
     void Update()
     {
-        distanceTraveledText.text = gameInfo.score.ToString("0");
+        scoreText.text = gameInfo.score.ToString("0");
 
         if (gameInfo.scores.ContainsKey(gameInfo.currentPlayer))
         {
@@ -55,14 +60,32 @@ public class GameUi : MonoBehaviour
         }
     }
 
-    public void UpdateScoreMultiplier(float consecutiveSwings)
+    public void UpdateTexts(float consecutiveSwings, float streakEndPenalty)
     {
+        scoreTextSpring.BumpRandom();
+        if (streakEndPenalty > 0)
+        {
+            gameInfo.score -= streakEndPenalty;
+        }
         consecutiveSwingsText.text = consecutiveSwings.ToString("0");
     }
 
     void OnScoreStreakEnded(Vector2 collisionForce, float maxVelocity)
     {
         consecutiveSwingsText.text = "";
+    }
+
+    public void UpdateSpeedBonus(float speedBonus, bool visible)
+    {
+        if (visible)
+        {
+            speedBonusText.gameObject.SetActive(true);
+        }
+        else
+        {
+            speedBonusText.gameObject.SetActive(false);
+        }
+        speedBonusText.text = "+" + speedBonus.ToString("0");
     }
 
     float savedSliderValue = 0f;
@@ -72,6 +95,6 @@ public class GameUi : MonoBehaviour
         {
             timeTillPerfectSwingSlider.value = timeTillPerfectSwingSlider.maxValue - timeTillPerfectSwing;
         }
-
     }
+
 }

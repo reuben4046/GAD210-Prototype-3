@@ -19,9 +19,12 @@ static class EventSystem
     public delegate void PlayerCollision(Vector2 contactPoint, float collisionForce);
     public static PlayerCollision OnPlayerCollision;
 
-    public delegate void PerfectSwing(int consecutiveSwings);
+    public delegate void PerfectSwing();
     public static PerfectSwing OnPerfectSwing;
 
     public delegate void ScoreStreakEnded(Vector2 collisionForce, float maxVelocity);
     public static ScoreStreakEnded OnScoreStreakEnded;
+
+    public delegate void SendTimeTillPerfectSwing(float timeTillPerfectSwing, bool isPerfectSwinging);
+    public static SendTimeTillPerfectSwing OnSendTimeTillPerfectSwing;
 }

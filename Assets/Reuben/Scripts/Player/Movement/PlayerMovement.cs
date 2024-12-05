@@ -5,17 +5,16 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private ParticleSystem impactParticles;
 
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private LineRenderer lineRenderer;
 
     [SerializeField] private float speed;
     [SerializeField] private float jumpForce;
 
     [SerializeField] private LayerMask layerMask;
-    bool isGrounded;
-    private float velocityMagnitude;
+    public float velocityMagnitude;
     private Vector2 collisionForce;
-    [SerializeField] private int maxVelocity = 20;
+    public int maxVelocity = 20;
 
     [Header("Audio")]
     [SerializeField] private AudioSource audioSource;
@@ -53,19 +52,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (velocityMagnitude > maxVelocity - perfectSwingThreshold && lineRenderer.enabled && !whooshSoundCoolDown)
         {
-            if (scoreStreakActive)
-            {
-                consecutiveSwings ++;
-            }
-            scoreStreakActive = true;
-            streakInactiveCalled = false;
+            EventSystem.OnPerfectSwing?.Invoke();
             whooshSoundCoolDown = true;
             StartCoroutine(WhooshSoundEffectCoolDown());
             audioSource.PlayOneShot(windWhooshSound, .3f);
-
-            EventSystem.OnPerfectSwing?.Invoke(consecutiveSwings);
         }
-        CheckScoreStreakActive();
     }
 
     IEnumerator WhooshSoundEffectCoolDown()
@@ -103,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
         impactParticles.Play();
 
         EventSystem.OnPlayerCollision?.Invoke(contactPoint, collisionForce.magnitude);
+        EventSystem.OnScoreStreakEnded?.Invoke(collisionForce, maxVelocity);
         scoreStreakActive = false;
     }
 
@@ -113,17 +105,6 @@ public class PlayerMovement : MonoBehaviour
         float velocityToVol = Mathf.Clamp(collisionForce.magnitude, 0, maxVelocity);
         float scaledVol = Mathf.Lerp(minVol, maxVol, audioControllCurve.Evaluate(velocityToVol / maxVelocity));
         audioSource.PlayOneShot(landingSound, scaledVol);
-    }
-
-    bool streakInactiveCalled = false;
-    void CheckScoreStreakActive()
-    {
-        if (!scoreStreakActive && !streakInactiveCalled)
-        {
-            streakInactiveCalled = true;
-            consecutiveSwings = 1;
-            EventSystem.OnScoreStreakEnded?.Invoke(collisionForce, maxVelocity);
-        }
     }
 
     // void ScaleWindSoundBasedOnVelocity()

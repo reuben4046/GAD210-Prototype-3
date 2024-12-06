@@ -12,6 +12,7 @@ public class ScoreStreakController : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip scoreUpSound;
     [SerializeField] private AudioClip scoreSreakEndSound;
+    [SerializeField] private AudioClip clickSound;
     [SerializeField] private AnimationCurve audioControllCurve;
 
     [Header("Perfect Swing")]
@@ -29,13 +30,7 @@ public class ScoreStreakController : MonoBehaviour
     [SerializeField] private float streakEndPenalty = 100f;
 
     [Header("Speed Bonus")]
-    [SerializeField] private MMF_Player speedBonusMMFPlayer;
-    MMF_FloatingText speedBonusFloatingText;
     float displayedSpeedBonusNumber = 0f;
-    [SerializeField] private float speedBonusScoreIncrease = 1f;
-    private Coroutine speedBonusCoroutine;
-
-
     void OnEnable()
     {
         EventSystem.OnPerfectSwing += OnPerfectSwing;
@@ -53,7 +48,6 @@ public class ScoreStreakController : MonoBehaviour
     void Start()
     {
         perfectSwingFloatingText = floatingTextMMFPlayer.GetFeedbackOfType<MMF_FloatingText>();
-        speedBonusFloatingText = speedBonusMMFPlayer.GetFeedbackOfType<MMF_FloatingText>();
         StartCoroutine(SpeedBonus());
     }
 
@@ -126,6 +120,7 @@ public class ScoreStreakController : MonoBehaviour
                 displayedSpeedBonusNumber++;
                 gameUi.UpdateSpeedBonus(displayedSpeedBonusNumber, visible: true);
                 gameInfo.score++;
+                audioSource.PlayOneShot(clickSound, .3f);
                 yield return new WaitForSeconds(.1f);
             }
             else

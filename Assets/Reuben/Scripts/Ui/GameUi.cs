@@ -14,7 +14,8 @@ public class GameUi : MonoBehaviour
 
     [SerializeField] private Slider timeTillPerfectSwingSlider;
 
-    [SerializeField] private MMSpringTMPDilate scoreTextSpring;
+    [SerializeField] private MMSpringTMPDilate scoreTextSpringDilate;
+    [SerializeField] private MMSpringTMPTextColor scoreTextSpringTextColor;
 
     [SerializeField] private TextMeshProUGUI speedBonusText;
 
@@ -62,7 +63,7 @@ public class GameUi : MonoBehaviour
 
     public void UpdateTexts(float consecutiveSwings, float streakEndPenalty)
     {
-        scoreTextSpring.BumpRandom();
+        scoreTextSpringDilate.BumpRandom();
         if (streakEndPenalty > 0)
         {
             gameInfo.score -= streakEndPenalty;
@@ -80,6 +81,7 @@ public class GameUi : MonoBehaviour
         if (visible)
         {
             speedBonusText.gameObject.SetActive(true);
+            scoreTextSpringTextColor.BumpRandom(); 
         }
         else
         {

@@ -28,6 +28,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float windWhooshSoundCoolDown = 1f;
     [SerializeField] private float perfectSwingThreshold = 5f;
 
+    [SerializeField] private ParticleSystem perfectSwingParticleSystem;
+    [SerializeField] private ParticleSystem speedSmokeParticleSystem;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -113,6 +116,38 @@ public class PlayerMovement : MonoBehaviour
         }
 
         EventSystem.OnSpeedBonusActive?.Invoke(isSpeedBonusActive);
+    }
+
+    void OnEnable()
+    {
+        EventSystem.OnPerfectSwing += OnPerfectSwing;
+        EventSystem.OnSpeedBonusActive += OnSpeedBonusActive;
+    }
+
+    void OnDisable()
+    {
+        EventSystem.OnPerfectSwing -= OnPerfectSwing;
+        EventSystem.OnSpeedBonusActive -= OnSpeedBonusActive;
+    }
+
+    void OnPerfectSwing()
+    {
+        perfectSwingParticleSystem.Play();
+    }
+
+    void OnSpeedBonusActive(bool isSpeedBonusActive)
+    {
+        ParticleSystem.EmissionModule em = speedSmokeParticleSystem.emission;        
+        if (isSpeedBonusActive)
+        {
+            Debug.Log("Speed bonus active");
+            em.enabled = true;
+        }
+        else
+        {
+            Debug.Log("Speed bonus inactive");
+            em.enabled = false;
+        }
     }
 
     // void ScaleWindSoundBasedOnVelocity()

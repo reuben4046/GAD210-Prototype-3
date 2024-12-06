@@ -36,7 +36,7 @@ public class CameraTarget : MonoBehaviour
 
         transform.position = new Vector2(cameraPosX, player.position.y);
 
-        if (transform.position.x > player.position.x + 50f || transform.position.y < -80f)
+        if (transform.position.x > player.position.x + 75f || transform.position.y < -80f)
         {
             SceneManager.LoadScene(2);
             EventSystem.OnGameOver?.Invoke();

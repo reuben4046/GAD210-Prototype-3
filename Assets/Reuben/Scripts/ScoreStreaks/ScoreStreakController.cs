@@ -27,7 +27,10 @@ public class ScoreStreakController : MonoBehaviour
     [SerializeField] private float forceRequiredToEndStreak = 10f;
     private Coroutine scoreMultiplierCoroutine;
     private bool isStreaking = false;
-    [SerializeField] private float streakEndPenalty = 100f;
+    [SerializeField] private AnimationCurve streakEndPenaltyCurve;
+    [SerializeField] private float maxStreakEndPenalty = 300f;
+    [SerializeField] private float minStreakEndPenalty = 100f;
+    private float streakEndPenalty;
 
     [Header("Speed Bonus")]
     float displayedSpeedBonusNumber = 0f;
@@ -65,29 +68,21 @@ public class ScoreStreakController : MonoBehaviour
         }
     }
 
-    // IEnumerator ScoreMultiplier()
-    // {
-    //     while (true)
-    //     {
-    //         scoreMultiplier += Time.deltaTime / 6;
-    //         float scoreIncrease = 1 * scoreMultiplier;
-    //         gameInfo.score += scoreIncrease;
-    //         gameUi.UpdateScoreMultiplier(scoreMultiplier);
-    //         yield return null;
-    //     }
-    // }
-
     void OnScoreStreakEnded(Vector2 collisionForce, float maxVelocity)
     {
         if (!isStreaking) return;
         if (collisionForce.magnitude < forceRequiredToEndStreak) return;
 
         consecutiveSwings = 0;
-        gameUi.UpdateTexts(consecutiveSwings, streakEndPenalty);
+
+        float collisionForceToStreakEndPenalty = Mathf.Clamp(collisionForce.magnitude, 0, maxVelocity);
+        float scaledStreakEndPenalty = Mathf.Lerp(minStreakEndPenalty, maxStreakEndPenalty, streakEndPenaltyCurve.Evaluate(collisionForceToStreakEndPenalty / maxVelocity));
+        streakEndPenalty = scaledStreakEndPenalty;
+        gameUi.UpdateTexts(consecutiveSwings, (int)streakEndPenalty);
+        perfectSwingFloatingText.Value = "-" + (int)streakEndPenalty;
         isStreaking = false;
 
         streakEndedMMFPlayer.PlayFeedbacks();
-        perfectSwingFloatingText.Value = "-" + streakEndPenalty;
         floatingTextMMFPlayer.PlayFeedbacks();
 
         float minVol = .1f;

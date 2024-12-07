@@ -30,4 +30,7 @@ static class EventSystem
 
     public delegate void SpeedBonusActive(bool active);
     public static SpeedBonusActive OnSpeedBonusActive;
+
+    public delegate void NoWebPointFeedback();
+    public static NoWebPointFeedback OnNoWebPointFeedback;
 }

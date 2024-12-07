@@ -128,6 +128,7 @@ public class WebShooter : MonoBehaviour
         {
             return true;
         }
+        EventSystem.OnNoWebPointFeedback?.Invoke();
         return false;
     }
 

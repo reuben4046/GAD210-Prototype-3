@@ -14,11 +14,14 @@ public class MenuUi : MonoBehaviour
     [SerializeField] private VerticalLayoutGroup verticalLayoutGroup;
     Transform VerticalLayoutGroupTransform { get { return verticalLayoutGroup.transform; } }
 
+    [SerializeField] private Texture2D purpleCursor;
+
     void Start()
     {
         if (gameInfo.currentPlayer != null) inputField.text = gameInfo.currentPlayer;
         ClearScores();
         RefreshScores();
+        Cursor.SetCursor(purpleCursor, Vector2.zero, CursorMode.Auto);
     }
 
     void Update()

@@ -778,6 +778,7 @@ MonoBehaviour:
   gameInfo: {fileID: 11400000, guid: f2624748163904ae2b83a8a41a351054, type: 2}
   inputField: {fileID: 1032463682}
   verticalLayoutGroup: {fileID: 1353638285}
+  purpleCursor: {fileID: 2800000, guid: 329fd8117e371462eaeb66cc3d398b2d, type: 3}
 --- !u!1 &857972048
 GameObject:
   m_ObjectHideFlags: 0

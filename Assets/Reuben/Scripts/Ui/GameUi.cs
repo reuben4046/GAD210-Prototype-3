@@ -15,9 +15,13 @@ public class GameUi : MonoBehaviour
     [SerializeField] private Slider timeTillPerfectSwingSlider;
 
     [SerializeField] private MMSpringTMPDilate scoreTextSpringDilate;
-    [SerializeField] private MMSpringTMPTextColor scoreTextSpringTextColor;
-
     [SerializeField] private TextMeshProUGUI speedBonusText;
+
+    [SerializeField] private Texture2D redCursor;
+    [SerializeField] private Texture2D purpleCursor;
+
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip noWebPointSound;
 
     void Start()
     {
@@ -29,13 +33,15 @@ public class GameUi : MonoBehaviour
     void OnEnable()
     {
         EventSystem.OnScoreStreakEnded += OnScoreStreakEnded;
-        EventSystem.OnSendTimeTillPerfectSwing += OnSendTimeTillPerfectSwing;
+        // EventSystem.OnSendTimeTillPerfectSwing += OnSendTimeTillPerfectSwing;
+        EventSystem.OnNoWebPointFeedback += OnNoWebPointFeedback;
     }
 
     void OnDisable()
     {
         EventSystem.OnScoreStreakEnded -= OnScoreStreakEnded;
-        EventSystem.OnSendTimeTillPerfectSwing -= OnSendTimeTillPerfectSwing;
+        // EventSystem.OnSendTimeTillPerfectSwing -= OnSendTimeTillPerfectSwing;
+        EventSystem.OnNoWebPointFeedback -= OnNoWebPointFeedback;
     }
 
     void Update()
@@ -61,12 +67,15 @@ public class GameUi : MonoBehaviour
         }
     }
 
-    public void UpdateTexts(float consecutiveSwings, float streakEndPenalty)
+    public void UpdateTexts(float consecutiveSwings, int streakEndPenalty)
     {
         scoreTextSpringDilate.BumpRandom();
         if (streakEndPenalty > 0)
         {
-            gameInfo.score -= streakEndPenalty;
+            float currentScore = gameInfo.score;
+            currentScore -= streakEndPenalty;
+            if (currentScore < 0) gameInfo.score = 0;
+            else gameInfo.score -= streakEndPenalty;
         }
         consecutiveSwingsText.text = consecutiveSwings.ToString("0");
     }
@@ -81,7 +90,6 @@ public class GameUi : MonoBehaviour
         if (visible)
         {
             speedBonusText.gameObject.SetActive(true);
-            scoreTextSpringTextColor.BumpRandom(); 
         }
         else
         {
@@ -90,13 +98,26 @@ public class GameUi : MonoBehaviour
         speedBonusText.text = "+" + speedBonus.ToString("0");
     }
 
-    float savedSliderValue = 0f;
-    void OnSendTimeTillPerfectSwing(float timeTillPerfectSwing, bool isPerfectSwinging)
-    {        
-        if (timeTillPerfectSwing > savedSliderValue)
-        {
-            timeTillPerfectSwingSlider.value = timeTillPerfectSwingSlider.maxValue - timeTillPerfectSwing;
-        }
+    void OnNoWebPointFeedback()
+    {
+        StartCoroutine(ChangeCursor());
     }
+
+    IEnumerator ChangeCursor()
+    {
+        Cursor.SetCursor(redCursor, Vector2.zero, CursorMode.Auto);
+        audioSource.PlayOneShot(noWebPointSound);
+        yield return new WaitForSeconds(0.15f);
+        Cursor.SetCursor(purpleCursor, Vector2.zero, CursorMode.Auto);
+    }
+
+    // float savedSliderValue = 0f;
+    // void OnSendTimeTillPerfectSwing(float timeTillPerfectSwing, bool isPerfectSwinging)
+    // {        
+    //     if (timeTillPerfectSwing > savedSliderValue)
+    //     {
+    //         timeTillPerfectSwingSlider.value = timeTillPerfectSwingSlider.maxValue - timeTillPerfectSwing;
+    //     }
+    // }
 
 }

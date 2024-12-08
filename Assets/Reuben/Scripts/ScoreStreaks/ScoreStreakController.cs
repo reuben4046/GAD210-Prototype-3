@@ -115,7 +115,7 @@ public class ScoreStreakController : MonoBehaviour
                 displayedSpeedBonusNumber++;
                 gameUi.UpdateSpeedBonus(displayedSpeedBonusNumber, visible: true);
                 gameInfo.score++;
-                audioSource.PlayOneShot(clickSound, .3f);
+                audioSource.PlayOneShot(clickSound, .6f);
                 yield return new WaitForSeconds(.1f);
             }
             else
